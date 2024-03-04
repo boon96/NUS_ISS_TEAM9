@@ -7,7 +7,7 @@ public class RoomTypeMapper {
 
     public static RoomTypeDTO mapToRoomTypeDto(RoomType roomType){
         return new RoomTypeDTO(
-                roomType.getRoom_type_id(),
+                roomType.getRoomTypeId(),
                 roomType.getName(),
                 roomType.getDescription(),
                 roomType.getPrice()
@@ -16,7 +16,7 @@ public class RoomTypeMapper {
 
     public static RoomType mapToRoomType(RoomTypeDTO roomTypeDTO){
         return new RoomType(
-                roomTypeDTO.getRoom_type_id(),
+                roomTypeDTO.getRoomTypeId(),
                 roomTypeDTO.getName(),
                 roomTypeDTO.getDescription(),
                 roomTypeDTO.getPrice()

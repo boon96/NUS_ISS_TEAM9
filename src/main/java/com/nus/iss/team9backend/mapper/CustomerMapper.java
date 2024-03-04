@@ -6,20 +6,20 @@ import com.nus.iss.team9backend.entity.Customer;
 public class CustomerMapper {
     public static CustomerDTO mapToCustomerDto(Customer customer){
         return new CustomerDTO(
-                customer.getCustomer_id(),
+                customer.getCustomerId(),
                 customer.getName(),
-                customer.getEmail_address(),
-                customer.getPhone_number()
+                customer.getEmailAddress(),
+                customer.getPhoneNumber()
         );
 
     }
 
     public static Customer mapToCustomer(CustomerDTO customerDto){
         return new Customer(
-                customerDto.getCustomer_id(),
+                customerDto.getCustomerId(),
                 customerDto.getName(),
-                customerDto.getEmail_address(),
-                customerDto.getPhone_number()
+                customerDto.getEmailAddress(),
+                customerDto.getPhoneNumber()
         );
 
     }
