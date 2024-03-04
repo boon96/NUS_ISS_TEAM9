@@ -19,7 +19,7 @@ public class RoomTypeResource {
 
     @PostMapping
     public ResponseEntity<RoomTypeDTO> createRoomType(@RequestBody RoomTypeDTO roomTypeDTO){
-        RoomTypeDTO savedRoomType = roomTypeService.createRoomType(roomTypeDTO);
+        RoomTypeDTO savedRoomType = roomTypeService.save(roomTypeDTO);
         return new ResponseEntity<>(savedRoomType, HttpStatus.CREATED);
     }
 

@@ -5,6 +5,6 @@ import com.nus.iss.team9backend.dto.RoomTypeDTO;
 
 
 public interface RoomTypeService {
-    RoomTypeDTO createRoomType(RoomTypeDTO roomTypeDTO);
+    RoomTypeDTO save(RoomTypeDTO roomTypeDTO);
 }
 
