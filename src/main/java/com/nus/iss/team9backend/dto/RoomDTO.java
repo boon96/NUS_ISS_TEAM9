@@ -1,8 +1,5 @@
 package com.nus.iss.team9backend.dto;
-import com.nus.iss.team9backend.entity.RoomType;
 import lombok.*;
-
-import java.util.Set;
 
 @Getter
 @Setter
