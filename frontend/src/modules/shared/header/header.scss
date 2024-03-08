@@ -1,52 +1,24 @@
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #007bff; /* Fill header with a single color */
-    padding: 10px 20px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+.navbar {
+    background-color: #1a1a1a; /* Dark background color */
   }
   
-  .logo img {
-    width: 35px;
+  .navbar-brand img {
+    filter: brightness(0) invert(1); /* Invert the logo color to white */
   }
   
-  .navigation ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .navigation ul li {
-    display: inline-block; /* Display list items in a line */
-    margin-right: 20px;
-  }
-  
-  .navigation ul li:last-child {
-    margin-right: 0;
-  }
-  
-  .navigation ul li a {
-    text-decoration: none;
-    color: #fff;
+  .nav-link {
+    color: #fff; /* White text color */
     font-weight: bold;
-    transition: color 0.3s ease;
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    transition: all 0.3s ease;
   }
   
-  .navigation ul li a:hover {
-    color: #f0f0f0;
-  }
-  
-  .reservation .reserve-button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
+  .nav-link:hover {
+    background-color: #3f3f3f; /* Darker background color on hover */
     border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
   }
   
-  .reservation .reserve-button:hover {
-    background-color: #0056b3;
+  .navbar-toggler-icon {
+    border-color: #fff; /* White color for the toggler icon */
   }

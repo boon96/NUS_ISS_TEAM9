@@ -56,21 +56,51 @@ export const Header = () => {
         
     // </div>
 
-    <div className="header">
-  <div className="logo">
-    <img src="/content/download.jpg" alt="Hotel Logo" width="35px"/>
-  </div>
-  <nav className="navigation">
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/rooms">Rooms</a></li>
-      <li><a href="/dining">Dining</a></li>
+<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a className="navbar-brand" href="#">
+    <img src={require('../../../resources/logo.svg').default} alt="Hotel Name" width="120" height="100" />
+  </a>
+  <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span className="navbar-toggler-icon"></span>
+  </button>
+
+  <div className="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul className="navbar-nav ml-auto">
+      <li className="nav-item active">
+        <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link" href="#">Rooms</a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link" href="#">Dining</a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link" href="#">Events</a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link" href="#">Contact</a>
+      </li>
     </ul>
-  </nav>
-  <div className="reservation">
-    <a href="/booking" className="reserve-button">Book Now</a>
   </div>
-</div>
+</nav>
+
+
+//     <div className="header">
+//   <div className="logo">
+//     <img src="/content/download.jpg" alt="Hotel Logo" width="35px"/>
+//   </div>
+//   <nav className="navigation">
+//     <ul>
+//       <li><a href="/">Home</a></li>
+//       <li><a href="/rooms">Rooms</a></li>
+//       <li><a href="/dining">Dining</a></li>
+//     </ul>
+//   </nav>
+//   <div className="reservation">
+//     <a href="/booking" className="reserve-button">Book Now</a>
+//   </div>
+// </div>
     )
 }
 export default Header;
