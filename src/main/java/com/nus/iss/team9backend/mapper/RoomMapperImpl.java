@@ -2,13 +2,20 @@ package com.nus.iss.team9backend.mapper;
 
 import com.nus.iss.team9backend.dto.RoomDTO;
 import com.nus.iss.team9backend.entity.Room;
+import com.nus.iss.team9backend.entity.RoomType;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import com.nus.iss.team9backend.repository.RoomTypeRepository;
+
 @Component
 public class RoomMapperImpl implements RoomMapper {
+
+    @Autowired
+    private RoomTypeRepository roomTypeRepository;
 
     @Override
     public Room toEntity(RoomDTO roomDTO){
@@ -18,7 +25,11 @@ public class RoomMapperImpl implements RoomMapper {
         Room room = new Room();
         room.setLocation(roomDTO.getLocation());
         room.setStatus(roomDTO.getStatus());
-        room.setRoomTypeId(roomDTO.getRoomTypeId());
+
+        if(roomDTO.getRoomTypeId()!=null){
+            RoomType roomType = roomTypeRepository.findById(roomDTO.getRoomTypeId()).orElse(null); // Fetch the RoomType entity by ID
+            room.setRoomType(roomType);
+        }
 
         return room;
     }
@@ -30,7 +41,10 @@ public class RoomMapperImpl implements RoomMapper {
         RoomDTO roomDTO = new RoomDTO();
         roomDTO.setLocation(entity.getLocation());
         roomDTO.setStatus(entity.getStatus());
-        roomDTO.setRoomTypeId(entity.getRoomTypeId());
+
+        if(entity.getRoomType() != null) {
+            roomDTO.setRoomTypeId(entity.getRoomType().getRoomTypeId()); // Set the RoomTypeId from the associated RoomType entity
+        }
 
         return roomDTO;
     }
