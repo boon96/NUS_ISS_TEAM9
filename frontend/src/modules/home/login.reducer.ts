@@ -13,7 +13,7 @@ export const testlogin = createAsyncThunk(
     'home/login',
     async(loginInfo: any) =>{
         try{
-            return(await axios.post('api',loginInfo,{
+            return(await axios.post('api/bookings',loginInfo,{
                 headers:{
                     "Content-Type": "application/json",
                 },
