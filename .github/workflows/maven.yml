@@ -24,10 +24,10 @@ jobs:
     - name: Set up JDK 17
       uses: actions/checkout@v4
       with:
-        java-version: '17'
-        distribution: 'temurin'
+        java-version: 17
         cache: maven
     - name: Build with Maven
       run: mvn clean compile
+    
 
     
