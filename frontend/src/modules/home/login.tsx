@@ -13,8 +13,9 @@ export const HotelHome = () => {
     const navigate = useNavigate();
 
     const [loginForm, setLoginForm] = useState({
-        userName: '',
-        password: '',
+        name: '',
+        emailAddress: '',
+        phoneNumber: 0,
     });
 
     const handleChange = (event) =>{
@@ -35,7 +36,7 @@ export const HotelHome = () => {
                 console.log(result);
                 // if correct result
                 //for testing only
-                navigate('/bookings',{state: {result}});
+                // navigate('/bookings',{state: {result}});
             })
         }
         catch(error){
@@ -45,29 +46,40 @@ export const HotelHome = () => {
     return (
         <div>
             <div className="col-md-6">
-                <label className="form-label" htmlFor="userName">
+                <label className="form-label" htmlFor="name">
                     Enter Username:
                 </label>
                 <input
                 type="text"
-                id="userName"
-                name="userName"
+                id="name"
+                name="name"
                 className="form-control"
                 onChange={handleChange} />
             </div>
 
             <div className="col-md-6">
-                <label className="form-label" htmlFor="password">
+                <label className="form-label" htmlFor="emailAddress">
                     Enter Password:
                 </label>
                 <input
                 type="text"
-                id="password"
-                name="password"
+                id="emailAddress"
+                name="emailAddress"
                 className="form-control"
                 onChange={handleChange} />
             </div>
-            <label> result of username {loginForm.userName}</label>
+            <div className="col-md-6">
+                <label className="form-label" htmlFor="phoneNumber">
+                    Enter Phome:
+                </label>
+                <input
+                type="number"
+                id="phoneNumber"
+                name="phoneNumber"
+                className="form-control"
+                onChange={handleChange} />
+            </div>
+            <label> result of username {loginForm.name}</label>
 
 
             <button type="button" onClick={onClick}>Submit Button</button>

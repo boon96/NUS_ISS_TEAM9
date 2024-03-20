@@ -14,9 +14,10 @@ export const App = () => {
       <Header/>
       <BrowserRouter basename={baseHref}>
         <Routes>
-        <Route path="/" element={<HotelHome />} />
-        <Route path="/bookings" element={<HotelBooking/> }/>
+        {/* <Route path="/" element={<HotelHome />} /> */}
+        <Route path="/" element={<HotelBooking/> }/>
         <Route path="/hotel" element={<Hotel/>}/>
+        <Route path="/test" element={<HotelHome />} />
           {/* <AppRoutes /> Use AppRoutes directly */}
         </Routes>
       </BrowserRouter>
