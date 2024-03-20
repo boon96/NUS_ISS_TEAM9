@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/booking")
+@RequestMapping("/api")
 public class BookingResource {
 
     @Autowired //need this autowired if not service wont be connect to spring boot
     private BookingService bookingService;
 
-    @PostMapping
+    @PostMapping(value = "/bookings")
     public ResponseEntity<BookingDTO> createBooking(@RequestBody BookingDTO bookingDTO){
         BookingDTO savedBooking = bookingService.save(bookingDTO);
         return new ResponseEntity<>(savedBooking, HttpStatus.CREATED);
