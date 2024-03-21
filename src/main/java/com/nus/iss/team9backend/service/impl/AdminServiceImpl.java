@@ -3,7 +3,6 @@ package com.nus.iss.team9backend.service.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nus.iss.team9backend.dto.AdminDTO;
 import com.nus.iss.team9backend.entity.Admin;
-import com.nus.iss.team9backend.entity.Customer;
 import com.nus.iss.team9backend.exception.ResourceNotFoundException;
 import com.nus.iss.team9backend.mapper.AdminMapper;
 import com.nus.iss.team9backend.repository.AdminRepository;
