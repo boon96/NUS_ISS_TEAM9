@@ -2,7 +2,6 @@ package com.nus.iss.team9backend.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nus.iss.team9backend.dto.RoomTypeDTO;
-import com.nus.iss.team9backend.entity.Customer;
 import com.nus.iss.team9backend.entity.RoomType;
 import com.nus.iss.team9backend.exception.ResourceNotFoundException;
 import com.nus.iss.team9backend.mapper.RoomTypeMapper;
