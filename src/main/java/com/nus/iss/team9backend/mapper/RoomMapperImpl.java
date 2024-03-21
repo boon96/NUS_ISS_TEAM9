@@ -23,6 +23,7 @@ public class RoomMapperImpl implements RoomMapper {
             return null;
         }
         Room room = new Room();
+        room.setRoomId(roomDTO.getRoomId());
         room.setLocation(roomDTO.getLocation());
         room.setStatus(roomDTO.getStatus());
 
@@ -39,6 +40,8 @@ public class RoomMapperImpl implements RoomMapper {
             return null;
         }
         RoomDTO roomDTO = new RoomDTO();
+        roomDTO.setRoomId(entity.getRoomId());
+        roomDTO.setRoomTypeId(entity.getRoomId());
         roomDTO.setLocation(entity.getLocation());
         roomDTO.setStatus(entity.getStatus());
 

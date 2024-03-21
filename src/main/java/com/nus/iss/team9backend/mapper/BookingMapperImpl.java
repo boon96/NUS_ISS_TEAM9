@@ -36,6 +36,7 @@ public class BookingMapperImpl implements BookingMapper {
             return null;
         }
         Booking booking = new Booking();
+        booking.setBookId(bookingDTO.getBookId());
         booking.setCheckInDate(bookingDTO.getCheckInDate());
         booking.setCheckOutDate(bookingDTO.getCheckOutDate());
         booking.setTotalPrice(bookingDTO.getTotalPrice());
@@ -62,6 +63,7 @@ public class BookingMapperImpl implements BookingMapper {
             return null;
         }
         BookingDTO bookingDTO = new BookingDTO();
+        bookingDTO.setBookId(entity.getBookId());
         bookingDTO.setCheckInDate(entity.getCheckInDate());
         bookingDTO.setCheckOutDate(entity.getCheckOutDate());
         bookingDTO.setTotalPrice(entity.getTotalPrice());
