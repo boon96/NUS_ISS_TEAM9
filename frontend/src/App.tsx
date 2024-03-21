@@ -5,6 +5,8 @@ import { HotelBooking } from './modules/hotel/booking';
 import Hotel from './modules/hotel/Hotel';
 import Header from './modules/shared/header/header';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ContactUsPage from './modules/home/contactUs';
+import AboutUsPage from './modules/home/aboutUs';
 
 export const App = () => {
   const baseHref = document.querySelector('base')?.getAttribute('href')?.replace(/\/$/,'');
@@ -18,6 +20,8 @@ export const App = () => {
         <Route path="/" element={<HotelBooking/> }/>
         <Route path="/hotel" element={<Hotel/>}/>
         <Route path="/test" element={<HotelHome />} />
+        <Route path="/contactus" element={<ContactUsPage />} />
+        <Route path="/aboutus" element={<AboutUsPage />} />
           {/* <AppRoutes /> Use AppRoutes directly */}
         </Routes>
       </BrowserRouter>

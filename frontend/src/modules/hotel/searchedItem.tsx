@@ -1,6 +1,8 @@
 import "./searchItem.css";
 
 const SearchItem = () => {
+
+  //retrieve details of searched item
   return (
     <div className="searchItem">
       <img
