@@ -16,6 +16,7 @@ public class RoomTypeMapperImpl implements RoomTypeMapper {
             return null;
         }
         RoomType roomType = new RoomType();
+        roomType.setRoomTypeId(roomTypeDTO.getRoomTypeId());
         roomType.setName(roomTypeDTO.getName());
         roomType.setDescription(roomTypeDTO.getDescription());
         roomType.setPrice(roomTypeDTO.getPrice());
@@ -28,6 +29,7 @@ public class RoomTypeMapperImpl implements RoomTypeMapper {
             return null;
         }
         RoomTypeDTO roomTypeDTO = new RoomTypeDTO();
+        roomTypeDTO.setRoomTypeId(entity.getRoomTypeId());
         roomTypeDTO.setName(entity.getName());
         roomTypeDTO.setDescription(entity.getDescription());
         roomTypeDTO.setPrice(entity.getPrice());

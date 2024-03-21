@@ -43,6 +43,6 @@ public class CustomerResource {
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteCustomer(@PathVariable("id") Long customerId){
         customerService.delete(customerId);
-        return ResponseEntity.ok("Customer deleted successfully: ");
+        return ResponseEntity.ok("Customer deleted successfully");
     }
 }

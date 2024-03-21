@@ -10,15 +10,16 @@ import java.util.List;
 @Component
 public class AdminMapperImpl implements AdminMapper{
     @Override
-    public Admin toEntity(AdminDTO AdminDTO){
-        if(AdminDTO==null){
+    public Admin toEntity(AdminDTO adminDTO){
+        if(adminDTO==null){
             return null;
         }
         Admin admin = new Admin();
-        admin.setName(AdminDTO.getName());
-        admin.setEmailAddress(AdminDTO.getEmailAddress());
-        admin.setPhoneNumber(AdminDTO.getPhoneNumber());
-        admin.setPassword(AdminDTO.getPassword());
+        admin.setAdminId(admin.getAdminId());
+        admin.setName(adminDTO.getName());
+        admin.setEmailAddress(adminDTO.getEmailAddress());
+        admin.setPhoneNumber(adminDTO.getPhoneNumber());
+        admin.setPassword(adminDTO.getPassword());
 
         return admin;
     }
