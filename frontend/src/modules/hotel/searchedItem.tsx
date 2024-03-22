@@ -1,8 +1,19 @@
 import "./searchItem.css";
+import React, { useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { AppDispatch } from "src/config/store";
 
 const SearchItem = () => {
+  //to call api
+  const dispatch = AppDispatch();
+  //to navigate to other page
+  const navigate = useNavigate();
 
   //retrieve details of searched item
+
+  const onClickFunction =() =>{
+        navigate('/hotel/confirmation')
+  }
   return (
     <div className="searchItem">
       <img
@@ -33,7 +44,7 @@ const SearchItem = () => {
           <span className="siPrice">$112</span> 
           {/* price */}
           <span className="siTaxOp">Includes taxes and fees</span>
-          <button className="siCheckButton">See availability</button>
+          <button className="siCheckButton" onClick={onClickFunction}>See availability</button>
         </div>
       </div>
     </div>
