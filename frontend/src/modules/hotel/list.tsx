@@ -84,62 +84,61 @@ const List = () => {
 
         // axios to search for hotel again
     
-        const totalPrice = 300;
-        console.log("before ", reservationForm);
+        
 
-        setReservationForm(formValues);
-        //MOCK DATA 
-        const customerId = 1;
-        const roomId = 2;
-        console.log("after", reservationForm);
-        const updatedReservationForm: IReservationForm = {
-            ...reservationForm, // Spread the existing form values
-            totalPrice: totalPrice, // Set the totalPrice property
-            customerId: customerId,
-            roomId: roomId
-        };
-        setReservationForm(updatedReservationForm); // Update the reservationForm state
+        // console.log("reservation form: ", reservationForm); // Log the updated reservationForm
 
+        // try {
+        //     // let result = await dispatch(findFmsByPSPNoSubNoHsCode(formValues));
+        //     const results = dispatch(reservationBooking(reservationForm)).then(result => {
+        //         console.log('results: ', result.payload);
+        //         // if status 400 do something,
+        //         // if status 400 navigate ( storage session etc)
 
-        console.log("reservation form: ", reservationForm); // Log the updated reservationForm
-
-        try {
-            // let result = await dispatch(findFmsByPSPNoSubNoHsCode(formValues));
-            const results = dispatch(reservationBooking(reservationForm)).then(result => {
-                console.log('results: ', result.payload);
-                // if status 400 do something,
-                // if status 400 navigate ( storage session etc)
-
-            });
-        } catch (error) {
-            console.log('Error status code:', error.response?.status); // Log the error status code
-            console.log('Error data:', error.response); // Log the error response body
-            console.log('failed result');
-        }
+        //     });
+        // } catch (error) {
+        //     console.log('Error status code:', error.response?.status); // Log the error status code
+        //     console.log('Error data:', error.response); // Log the error response body
+        //     console.log('failed result');
+        // }
 
     };
 
     const handleReservation = (values) => {
         console.log(formValues);
-        const totalPrice = 300;
-        console.log("before ", reservationForm);
 
-        setReservationForm(formValues);
-        //MOCK DATA 
-        const customerId = 1;
-        const roomId = 2;
-        console.log("after", reservationForm);
-        const updatedReservationForm: IReservationForm = {
-            ...reservationForm, // Spread the existing form values
-            totalPrice: totalPrice, // Set the totalPrice property
-            customerId: customerId,
-            roomId: roomId
-        };
-        setReservationForm(updatedReservationForm); // Update the reservationForm state
+    // Update reservation form with current form values
+    setReservationForm(formValues);
 
+    //MOCK DATA 
+    const totalPrice = 300;
+    const customerId = 1;
+    const roomId = 2;
 
-        console.log("reservation form: ", reservationForm); // Log the updated reservationForm
+    // Create an updated reservation form object with totalPrice, customerId, and roomId
+    const updatedReservationForm: IReservationForm = {
+        ...formValues, // Spread the existing form values
+        totalPrice: totalPrice,
+        customerId: customerId,
+        roomId: roomId
     };
+
+    // Update reservation form with the updated reservation form object
+    setReservationForm(updatedReservationForm);
+
+    // Log the updated reservationForm after setting it
+    console.log("Updated reservation form:", updatedReservationForm);
+
+    // Perform any asynchronous operations with the updated reservation form
+    try {
+        const results = dispatch(reservationBooking(updatedReservationForm)).then(result => {
+            console.log('results: ', result.payload);
+            // Handle the result as needed
+        });
+    } catch (error) {
+        console.log('Error:', error);
+    }
+};
 
     return (
         <div>
