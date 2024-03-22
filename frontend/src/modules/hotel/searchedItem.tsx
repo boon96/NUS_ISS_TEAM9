@@ -1,7 +1,12 @@
+import { useEffect } from "react";
 import "./searchItem.css";
+<<<<<<< HEAD
 import React, { useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { AppDispatch } from "src/config/store";
+=======
+import axios from "axios";
+>>>>>>> 78f32b5dbbf6fe60ebe28386e018492320c9ea36
 
 const SearchItem = () => {
   //to call api
@@ -9,6 +14,20 @@ const SearchItem = () => {
   //to navigate to other page
   const navigate = useNavigate();
 
+  const fetchAllBooking = async()=>{
+    try{
+      const url = '/api/booking';
+      const response = await  axios.get(url);
+      const data = response.data;
+      console.log("Booking data is ", data);
+    }catch(error){
+      console.log("Error fetching all booking", error);
+    }
+  }
+
+  useEffect(()=>{
+    fetchAllBooking();
+  },[]);
   //retrieve details of searched item
 
   const onClickFunction =() =>{
