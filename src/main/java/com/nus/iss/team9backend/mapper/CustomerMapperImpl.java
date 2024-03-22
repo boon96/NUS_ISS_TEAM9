@@ -16,6 +16,7 @@ public class CustomerMapperImpl implements CustomerMapper{
             return null;
         }
         Customer customer = new Customer();
+        customer.setCustomerId(customerDTO.getCustomerId());
         customer.setName(customerDTO.getName());
         customer.setEmailAddress(customerDTO.getEmailAddress());
         customer.setPhoneNumber(customerDTO.getPhoneNumber());
@@ -29,6 +30,7 @@ public class CustomerMapperImpl implements CustomerMapper{
             return null;
         }
         CustomerDTO customerDTO = new CustomerDTO();
+        customerDTO.setCustomerId(entity.getCustomerId());
         customerDTO.setName(entity.getName());
         customerDTO.setEmailAddress(entity.getEmailAddress());
         customerDTO.setPhoneNumber(entity.getPhoneNumber());
