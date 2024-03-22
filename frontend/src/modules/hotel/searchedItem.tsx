@@ -1,7 +1,23 @@
+import { useEffect } from "react";
 import "./searchItem.css";
+import axios from "axios";
 
 const SearchItem = () => {
 
+  const fetchAllBooking = async()=>{
+    try{
+      const url = '/api/booking';
+      const response = await  axios.get(url);
+      const data = response.data;
+      console.log("Booking data is ", data);
+    }catch(error){
+      console.log("Error fetching all booking", error);
+    }
+  }
+
+  useEffect(()=>{
+    fetchAllBooking();
+  },[]);
   //retrieve details of searched item
   return (
     <div className="searchItem">
