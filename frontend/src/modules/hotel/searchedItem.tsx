@@ -1,33 +1,35 @@
-import { useEffect } from "react";
 import "./searchItem.css";
-<<<<<<< HEAD
 import React, { useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { AppDispatch } from "src/config/store";
-=======
 import axios from "axios";
->>>>>>> 78f32b5dbbf6fe60ebe28386e018492320c9ea36
 
-const SearchItem = () => {
+const SearchItem = (props: any) => {
   //to call api
   const dispatch = AppDispatch();
   //to navigate to other page
   const navigate = useNavigate();
 
-  const fetchAllBooking = async()=>{
-    try{
-      const url = '/api/booking';
-      const response = await  axios.get(url);
-      const data = response.data;
-      console.log("Booking data is ", data);
-    }catch(error){
-      console.log("Error fetching all booking", error);
-    }
-  }
+  const CheckDate = props.dates;
+  const price = props.price;
 
-  useEffect(()=>{
-    fetchAllBooking();
-  },[]);
+  console.log("price: " , price);
+  console.log("check in and checkout date: ", CheckDate);
+
+  // const fetchAllBooking = async()=>{
+  //   try{
+  //     const url = '/api/booking';
+  //     const response = await  axios.get(url);
+  //     const data = response.data;
+  //     console.log("Booking data is ", data);
+  //   }catch(error){
+  //     console.log("Error fetching all booking", error);
+  //   }
+  // }
+
+  // useEffect(()=>{
+  //   fetchAllBooking();
+  // },[]);
   //retrieve details of searched item
 
   const onClickFunction =() =>{
@@ -63,7 +65,7 @@ const SearchItem = () => {
           <span className="siPrice">$112</span> 
           {/* price */}
           <span className="siTaxOp">Includes taxes and fees</span>
-          <button className="siCheckButton" onClick={onClickFunction}>See availability</button>
+          <button className="siCheckButton" onClick={props.handleReservation}>See availability</button>
         </div>
       </div>
     </div>

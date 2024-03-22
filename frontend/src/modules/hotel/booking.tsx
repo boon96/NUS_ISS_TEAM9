@@ -16,13 +16,14 @@ export const HotelBooking = () => {
     const [dates1, setDates] = useState([]);
 
     interface FormValues {
-        // startDate?: Date;
-        // endDate?: Date;
-        startDate?: String,
-        endDate?: String;
+        startDate?: Date;
+        endDate?: Date;
+        // startDate?: String,
+        // endDate?: String;
       }
 
-    const [formValues, setFormValues] = useState<FormValues>({startDate: '', endDate: ''});
+    // const [formValues, setFormValues] = useState<FormValues>({startDate: '', endDate: ''});
+    const [formValues, setFormValues] = useState<FormValues>({});
 
     type FieldType = {
         dates?: [moment.Moment[], moment.Moment[]];
@@ -63,19 +64,9 @@ export const HotelBooking = () => {
             console.log('Error data:', error.response); // Log the error response body
             console.log('failed result');
         }
-    // axios.post('YOUR_API_ENDPOINT', values)
-    //   .then(response => {
-    //     console.log('Server response:', response.data);
-    //     // Handle successful response
-    //   })
-    //   .catch(error => {
-    //     console.error('Error:', error);
-    //     // Handle error
-    //   });
     Storage.session.set('checkInDate', formValues.startDate);
     Storage.session.set('checkOutDate', formValues.endDate);
     Storage.session.set('searchedForm', formValues);
-    Storage.session.set('test', dates1);
     // Storage.session.set('adults',adults);
     navigate('/hotel');
 };
@@ -112,19 +103,21 @@ return (
                         format="DD-MM-YYYY"
                         disabledDate={(current) => current && current < moment().endOf('day')}
                         showTime={false}
-                        onChange={(dates) => {
-                            if (dates && dates.length === 2) {
-                              const startDate = dates[0].format('DD-MM-YYYY');
-                              const endDate = dates[1].format('DD-MM-YYYY');
-                              setFormValues({ startDate, endDate });
-                            }
-                          }}
-                          //for date format
                         // onChange={(dates) => {
                         //     if (dates && dates.length === 2) {
-                        //       setFormValues({ startDate: dates[0].toDate(), endDate: dates[1].toDate() });
+                        //     //   const startDate = dates[0].format('DD-MM-YYYY');
+                        //     const startDate = dates[0];
+                        //     const endDate = dates[1];
+                        //     //   const endDate = dates[1].format('DD-MM-YYYY');
+                        //       setFormValues({ startDate, endDate });
                         //     }
                         //   }}
+                          //for date format
+                        onChange={(dates) => {
+                            if (dates && dates.length === 2) {
+                              setFormValues({ startDate: dates[0].toDate(), endDate: dates[1].toDate() });
+                            }
+                          }}
                       
                     />
                 </Form.Item>

@@ -14,11 +14,12 @@ export const roomSearch = createAsyncThunk(
     async(Form: any) =>{
         try{
             console.log(Form);
-            return(await axios.post('api/room',Form,{
-                headers:{
-                    "Content-Type": "application/json",
-                },
-            })
+            // return(await axios.get('api/room',Form,{
+            //     headers:{
+            //         "Content-Type": "application/json",
+            //     },
+            // })
+            return(await axios.get('api/room')
             // return response;
             )
         }catch(error){
@@ -26,6 +27,26 @@ export const roomSearch = createAsyncThunk(
         }
     }
 )
+
+export const reservationBooking = createAsyncThunk(
+    'reservation/booking',
+    async(reservationForm: any) =>{
+        try{
+            console.log(reservationForm);
+            return(await axios.post('api/booking',reservationForm,{
+                headers:{
+                    "Content-Type": "application/json",
+                },
+            })
+            // return(await axios.get('api/room')
+            // return response;
+            )
+        }catch(error){
+            throw error;
+        }
+    }
+)
+
 
 export const HotelStateSlice = createSlice({
     name: 'hotel-search',
@@ -42,6 +63,13 @@ export const HotelStateSlice = createSlice({
             state.activationFailure = true;
         })
         .addCase(roomSearch.fulfilled, state => {
+            state.activationSuccess = true;
+        })
+        .addCase(reservationBooking.pending, () => initialState)
+        .addCase(reservationBooking.rejected, state => {
+            state.activationFailure = true;
+        })
+        .addCase(reservationBooking.fulfilled, state => {
             state.activationSuccess = true;
         });
     },
