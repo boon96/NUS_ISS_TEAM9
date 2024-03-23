@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -69,4 +70,12 @@ public class AdminServiceImpl implements AdminService {
         adminRepository.deleteById(adminId);
 
     }
+
+    @Override
+    public AdminDTO verifyAdmin(String emailAddress, String password) {
+        Admin admin = adminRepository.findByEmailAddressAndPassword(emailAddress, password)
+                .orElseThrow(() -> new ResourceNotFoundException("Admin does not exist"));
+        return adminMapper.toDto(admin);
+    }
+
 }

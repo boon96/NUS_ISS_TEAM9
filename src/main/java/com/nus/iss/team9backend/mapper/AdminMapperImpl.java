@@ -16,6 +16,7 @@ public class AdminMapperImpl implements AdminMapper{
         }
         Admin admin = new Admin();
         admin.setAdminId(admin.getAdminId());
+        admin.setAdminId(admin.getAdminId());
         admin.setName(adminDTO.getName());
         admin.setEmailAddress(adminDTO.getEmailAddress());
         admin.setPhoneNumber(adminDTO.getPhoneNumber());
@@ -30,6 +31,7 @@ public class AdminMapperImpl implements AdminMapper{
             return null;
         }
         AdminDTO adminDTO = new AdminDTO();
+        adminDTO.setAdminId(entity.getAdminId());
         adminDTO.setName(entity.getName());
         adminDTO.setEmailAddress(entity.getEmailAddress());
         adminDTO.setPhoneNumber(entity.getPhoneNumber());

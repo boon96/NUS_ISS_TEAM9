@@ -44,4 +44,15 @@ public class AdminResource {
         adminService.delete(adminId);
         return ResponseEntity.ok("Admin deleted successfully: ");
     }
+
+    @PostMapping("/admin-verify")
+    public ResponseEntity<AdminDTO> verifyAdmin(@RequestParam String emailAddress, @RequestParam String password){
+        AdminDTO dto = adminService.verifyAdmin(emailAddress,password);
+        if(dto!=null){
+            return ResponseEntity.ok(dto);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+
+    }
 }
