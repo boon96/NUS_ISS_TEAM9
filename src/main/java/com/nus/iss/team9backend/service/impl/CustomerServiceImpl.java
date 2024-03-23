@@ -70,4 +70,11 @@ public class CustomerServiceImpl implements CustomerService {
         customerRepository.deleteById(customerId);
 
     }
+
+    @Override
+    public CustomerDTO verifyCustomer(String emailAddress, Long phoneNumber) {
+        Customer customer = customerRepository.findByEmailAddressAndPhoneNumber(emailAddress, phoneNumber)
+                .orElseThrow(() -> new ResourceNotFoundException("Customer does not exist"));
+        return customerMapper.toDto(customer);
+    }
 }

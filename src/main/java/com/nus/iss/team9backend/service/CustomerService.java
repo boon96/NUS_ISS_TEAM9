@@ -14,4 +14,6 @@ public interface CustomerService {
     CustomerDTO update (Long customerId, CustomerDTO dto);
 
     void delete(Long customerId);
+
+    CustomerDTO verifyCustomer(String emailAddress, Long phoneNumber);
 }

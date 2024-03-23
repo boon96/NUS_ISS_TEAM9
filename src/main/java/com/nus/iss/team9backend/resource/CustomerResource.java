@@ -45,4 +45,15 @@ public class CustomerResource {
         customerService.delete(customerId);
         return ResponseEntity.ok("Customer deleted successfully");
     }
+
+    @PostMapping("/customer-verify")
+    public ResponseEntity<CustomerDTO> verifyCustomer(@RequestParam String emailAddress, @RequestParam Long phoneNumber){
+        CustomerDTO dto = customerService.verifyCustomer(emailAddress,phoneNumber);
+        if(dto!=null){
+            return ResponseEntity.ok(dto);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+
+    }
 }
