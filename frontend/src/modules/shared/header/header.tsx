@@ -75,6 +75,16 @@ export const Header = () => {
       <li className="nav-item">
         <a className="nav-link" href="/contactus">Contact</a>
       </li>
+      </ul>
+      {/* Move these items to the right */}
+      <ul className="navbar-nav">
+    <li className="nav-item">
+      <a className="nav-link" href="#">Register</a>
+    </li>
+    <li className="nav-item">
+      <a className="nav-link" href="/login">Sign in</a>
+    </li>
+    {/* End of items to move */}
     </ul>
   </div>
 </nav>

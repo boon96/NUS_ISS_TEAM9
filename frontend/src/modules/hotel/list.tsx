@@ -1,6 +1,6 @@
 import "./searchItem.css";
 import { useLocation } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import SearchItem from "./searchedItem";
@@ -17,8 +17,18 @@ const List = () => {
         const dispatch = AppDispatch();
     const checkInDate = Storage.session.get('checkInDate');
     const checkOutDate = Storage.session.get('checkOutDate');
-    const searchedForm = Storage.session.get('searchedForm')
+    const searchedForm = Storage.session.get('searchedForm');
+    const isLogin = Storage.session.get('customer');
     console.log("formvalues: " , searchedForm);
+
+    const [userLoggedIn, setUserLoggedIn] = useState(false);
+
+    useEffect(() => {
+        if (isLogin) {
+            setUserLoggedIn(true);
+            console.log("got user");
+        }
+    }, []);
     
     interface FormValues {
         checkInDate?: Date;
@@ -191,7 +201,7 @@ const List = () => {
                     </div>
                     <div className="listResult">
                         <SearchItem price={10} dates={formValues}
-                        handleSubmit={handleSubmit} handleReservation={handleReservation}/>
+                        handleSubmit={handleSubmit} handleReservation={handleReservation} userLoggedIn={userLoggedIn}/>
                     </div>
                 </div>
             </div>

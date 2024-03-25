@@ -65,7 +65,13 @@ const SearchItem = (props: any) => {
           <span className="siPrice">$112</span> 
           {/* price */}
           <span className="siTaxOp">Includes taxes and fees</span>
-          <button className="siCheckButton" onClick={props.handleReservation}>See availability</button>
+          {props.userLoggedIn ? (
+          <button className="siCheckButton" onClick={props.handleReservation}>Book Now</button>
+          ):
+          (
+            <button className="siCheckButton" onClick={props.handleReservation}>See availability</button>
+          )
+}
         </div>
       </div>
     </div>

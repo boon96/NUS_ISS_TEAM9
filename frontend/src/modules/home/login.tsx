@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { testlogin } from "./login.reducer";
 import { Navigate, useNavigate } from "react-router-dom";
 import { AppDispatch } from "src/config/store";
+import { Storage } from 'react-jhipster';
 // import { useAppDispatch } from 'react-redux';
 
 export const HotelHome = () => {
@@ -13,7 +14,7 @@ export const HotelHome = () => {
     const navigate = useNavigate();
 
     const [loginForm, setLoginForm] = useState({
-        name: '',
+        // name: '',
         emailAddress: '',
         phoneNumber: 0,
     });
@@ -36,7 +37,9 @@ export const HotelHome = () => {
                 console.log(result);
                 // if correct result
                 //for testing only
-                // navigate('/bookings',{state: {result}});
+                Storage.session.set("customer", result.payload['data']);
+
+                navigate('/');
             })
         }
         catch(error){
@@ -45,7 +48,7 @@ export const HotelHome = () => {
     };
     return (
         <div>
-            <div className="col-md-6">
+            {/* <div className="col-md-6">
                 <label className="form-label" htmlFor="name">
                     Enter Username:
                 </label>
@@ -55,11 +58,11 @@ export const HotelHome = () => {
                 name="name"
                 className="form-control"
                 onChange={handleChange} />
-            </div>
+            </div> */}
 
             <div className="col-md-6">
                 <label className="form-label" htmlFor="emailAddress">
-                    Enter Password:
+                    Enter Email Address:
                 </label>
                 <input
                 type="text"
@@ -70,7 +73,7 @@ export const HotelHome = () => {
             </div>
             <div className="col-md-6">
                 <label className="form-label" htmlFor="phoneNumber">
-                    Enter Phome:
+                    Enter Phone:
                 </label>
                 <input
                 type="number"
@@ -79,7 +82,7 @@ export const HotelHome = () => {
                 className="form-control"
                 onChange={handleChange} />
             </div>
-            <label> result of username {loginForm.name}</label>
+            <label> result of username {loginForm.emailAddress}</label>
 
 
             <button type="button" onClick={onClick}>Submit Button</button>
