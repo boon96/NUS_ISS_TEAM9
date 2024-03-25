@@ -18,6 +18,13 @@ export const Header = () => {
     }
   }, [userLoggedIn]);
 
+  const handleLogout = () => {
+    // Perform logout actions here, such as clearing user session/storage
+    // Example:
+    sessionStorage.clear() // Assuming 'Storage' is from 'react-jhipster'
+    window.location.reload();
+};
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <a className="navbar-brand" href="/">
@@ -53,7 +60,11 @@ export const Header = () => {
             {/* End of items to move */}
           </ul>
         ) : (
+          <div style={{ color: 'lime' }}>
           <span style={{ color: 'lime' }}>Hello {isLogin.name}</span>
+          <span onClick={handleLogout} style={{ cursor: 'pointer' }}> Logout </span>
+          </div>
+
         )}
       </div>
     </nav>
