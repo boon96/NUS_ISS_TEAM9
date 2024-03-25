@@ -18,9 +18,9 @@ const List = () => {
     const checkInDate = Storage.session.get('checkInDate');
     const checkOutDate = Storage.session.get('checkOutDate');
     const searchedForm = Storage.session.get('searchedForm');
-    const isLogin = Storage.session.get('customer');
     console.log("formvalues: " , searchedForm);
 
+    const isLogin = Storage.session.get('customer');
     const [userLoggedIn, setUserLoggedIn] = useState(false);
 
     useEffect(() => {

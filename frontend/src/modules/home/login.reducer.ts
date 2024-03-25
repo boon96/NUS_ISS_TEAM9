@@ -26,6 +26,23 @@ export const testlogin = createAsyncThunk(
     }
 )
 
+export const createAccount = createAsyncThunk(
+    'home/create',
+    async(formValues: any) =>{
+        try{
+            return(await axios.post('api/customer',formValues,{
+                headers:{
+                    "Content-Type": "application/json",
+                },
+            })
+            // return response;
+            )
+        }catch(error){
+            throw error;
+        }
+    }
+)
+
 export const HomeStateSlice = createSlice({
     name: 'home-login',
     initialState: initialState as HomeState,
@@ -41,6 +58,13 @@ export const HomeStateSlice = createSlice({
             state.activationFailure = true;
         })
         .addCase(testlogin.fulfilled, state => {
+            state.activationSuccess = true;
+        })
+        .addCase(createAccount.pending, () => initialState)
+        .addCase(createAccount.rejected, state => {
+            state.activationFailure = true;
+        })
+        .addCase(createAccount.fulfilled, state => {
             state.activationSuccess = true;
         });
     },

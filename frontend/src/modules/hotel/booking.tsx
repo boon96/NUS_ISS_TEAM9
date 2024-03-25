@@ -5,6 +5,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { AppDispatch } from "src/config/store";
 import { Storage } from 'react-jhipster';
 import { roomSearch } from "./hotel.reducer";
+import HotelHeader from "../shared/UI/hotelHeader";
 
 export const HotelBooking = () => {
     const { RangePicker } = DatePicker;
@@ -12,17 +13,10 @@ export const HotelBooking = () => {
     const dispatch = AppDispatch();
     //to navigate to other page
     const navigate = useNavigate();
-    const isLogin = Storage.session.get('customer');
+
 
     const [dates1, setDates] = useState([]);
-    const [userLoggedIn, setUserLoggedIn] = useState(false);
 
-    useEffect(() => {
-        if (isLogin) {
-            setUserLoggedIn(true);
-            console.log("got user");
-        }
-    }, []);
 
     interface FormValues {
         startDate?: Date;
@@ -86,10 +80,8 @@ export const HotelBooking = () => {
 
     return (
         <section className="m-8">
-            <div className="d-flex align-items-center justify-content-center">
-                <h1>ABC HOTEL</h1>
-            </div>
-
+            <HotelHeader/>
+            
             <Card title="Book your stay here" style={{ width: 600, margin: 'auto' }}>
                 <Form
                     name="basic"
