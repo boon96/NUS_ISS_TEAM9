@@ -28,14 +28,12 @@ export const CreateAccount = () => {
 
             if (result.payload) {
                 // Show a success notification to the user
-                navigate('/');
+                navigate('/login');
                 notification.success({
                     message: 'Account Created',
                     description: 'Your account has been created successfully. Please sign in to access your account.',
                 });
-    
             } else {
-
                 notification.error({
                     message: 'Account Creation Failed',
                     description: 'Failed to create your account. Please try again later.',

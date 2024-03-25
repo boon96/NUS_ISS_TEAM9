@@ -3,27 +3,53 @@ import { Storage } from 'react-jhipster';
 
 export const Header = () => {
 
-  const isLogin = Storage.session.get('customer');
+//   const isLogin = Storage.session.get('customer');
+//   const [userLoggedIn, setUserLoggedIn] = useState(false);
+
+//   useEffect(() => {
+//     if (isLogin) {
+//       setUserLoggedIn(true);
+//       console.log(userLoggedIn);
+//       console.log("got user navbar");
+//       console.log(isLogin.name);
+      
+//     }
+//     else {
+//       setUserLoggedIn(false); // Update userLoggedIn state when user is not logged in
+//     }
+//     // window.location.reload();
+//   }, [userLoggedIn]);
+
+//   const handleLogout = () => {
+//     // Perform logout actions here, such as clearing user session/storage
+//     // Example:
+//     sessionStorage.clear() // Assuming 'Storage' is from 'react-jhipster'
+//     window.location.reload();
+// };
+const isLogin = Storage.session.get('customer');
   const [userLoggedIn, setUserLoggedIn] = useState(false);
+  const [refreshed, setRefreshed] = useState(false); // Flag to track if page has refreshed
 
   useEffect(() => {
     if (isLogin) {
       setUserLoggedIn(true);
-      console.log(userLoggedIn);
-      console.log("got user navbar");
-      console.log(isLogin.name);
+      console.log("User logged in:", isLogin.name);
+    } else {
+      setUserLoggedIn(false);
+      console.log("User not logged in");
     }
-    else {
-      setUserLoggedIn(false); // Update userLoggedIn state when user is not logged in
+
+    // Check if data is available and page has not yet refreshed
+    if (isLogin !== null && !refreshed) {
+      setRefreshed(true); // Update flag to indicate that page has refreshed
     }
-  }, [userLoggedIn]);
+  }, [isLogin && !refreshed]); // Update effect when login status changes
 
   const handleLogout = () => {
-    // Perform logout actions here, such as clearing user session/storage
-    // Example:
-    sessionStorage.clear() // Assuming 'Storage' is from 'react-jhipster'
-    window.location.reload();
-};
+    sessionStorage.clear(); // Clear user session/storage
+    window.location.reload(); // Refresh the page
+    setRefreshed(true);
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">

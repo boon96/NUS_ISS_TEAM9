@@ -26,11 +26,13 @@ export const HotelHome = () => {
             } else {
                 Storage.session.set("customer", result.payload['data']);
                 navigate('/');
-                notification.success({
-                    message: 'Logged In',
-                    description: 'Hello ' + result.payload['data']['name'],
-                });
+                window.location.reload();
+                // notification.success({
+                //     message: 'Logged In',
+                //     description: 'Hello ' + result.payload['data']['name'],
+                // });
             }
+            
         }
         catch (error) {
             console.log("error onclick" + error);

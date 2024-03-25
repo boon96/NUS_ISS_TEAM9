@@ -152,13 +152,20 @@ const List = () => {
         // });
         const result = await dispatch(reservationBooking(updatedReservationForm));
         console.log(result)
-        if(result.payload == undefined || result.payload == "" || result.payload == ''){
-            navigate('/');
-                notification.success({
-                    message: 'Logged In',
-                    description: 'Hello ' + result.payload['data']['name'],
-                });
+        if(result.payload == undefined || result.payload == null || result.payload == ''){
+            notification.error({
+                message: 'Error creating booking',
+                description: 'Failed to reserve room. Please try again later.',
+            });
             
+        } else{
+            console.log("success")
+            const data = result.payload['data'];
+            navigate('/summary', { state: { data } });
+                notification.success({
+                    message: 'Reservation Created',
+                    description: 'Reservation has been made',
+                });
         }
     } catch (error) {
         console.log('Error:', error);
