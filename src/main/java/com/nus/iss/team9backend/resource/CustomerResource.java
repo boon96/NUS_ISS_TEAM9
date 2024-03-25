@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/customer")
@@ -47,8 +48,12 @@ public class CustomerResource {
     }
 
     @PostMapping("/customer-verify")
-    public ResponseEntity<CustomerDTO> verifyCustomer(@RequestParam String emailAddress, @RequestParam Long phoneNumber){
-        CustomerDTO dto = customerService.verifyCustomer(emailAddress,phoneNumber);
+    // public ResponseEntity<CustomerDTO> verifyCustomer(@RequestParam String emailAddress, @RequestParam Long phoneNumber){
+        public ResponseEntity<CustomerDTO> verifyCustomer(@RequestBody Map<String, String> loginInfo){
+        // CustomerDTO dto = customerService.verifyCustomer(emailAddress,phoneNumber);
+        String emailAddress = loginInfo.get("emailAddress");
+        Long phoneNumber = Long.parseLong(loginInfo.get("phoneNumber"));
+        CustomerDTO dto = customerService.verifyCustomer(emailAddress, phoneNumber);
         if(dto!=null){
             return ResponseEntity.ok(dto);
         }else{
