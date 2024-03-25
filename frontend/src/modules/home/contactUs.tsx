@@ -18,8 +18,8 @@ export const ContactUsPage = () =>{
               <Title level={2}>Contact Information</Title>
               <div>
                 <p><PhoneOutlined /> Phone: +1234567890</p>
-                <p><MailOutlined /> Email: info@example.com</p>
-                <p><EnvironmentOutlined /> Address: 123 Hotel Street, City, Country</p>
+                <p><MailOutlined /> Email: TEAM9@test.com</p>
+                <p><EnvironmentOutlined /> Address: NCS PTE LTD, Singapore, Singapore</p>
               </div>
             </Col>
             <Col xs={24} sm={24} md={12}>

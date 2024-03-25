@@ -7,14 +7,18 @@ import SearchItem from "./searchedItem";
 import { Storage } from 'react-jhipster';
 import moment, { Moment } from 'moment';
 import dayjs, { Dayjs } from 'dayjs';
-import { DatePicker, InputNumber, Button, Form } from 'antd';
+import { DatePicker, InputNumber, Button, Form, notification} from 'antd';
 import { reservationBooking } from "./hotel.reducer";
 import { AppDispatch } from "src/config/store";
+import { useNavigate } from "react-router-dom";
+
 
 const List = () => {
     const { RangePicker } = DatePicker;
         //to call api
         const dispatch = AppDispatch();
+            //to navigate to other page
+    const navigate = useNavigate();
     const checkInDate = Storage.session.get('checkInDate');
     const checkOutDate = Storage.session.get('checkOutDate');
     const searchedForm = Storage.session.get('searchedForm');
@@ -22,6 +26,7 @@ const List = () => {
 
     const isLogin = Storage.session.get('customer');
     const [userLoggedIn, setUserLoggedIn] = useState(false);
+    
 
     useEffect(() => {
         if (isLogin) {
@@ -114,7 +119,7 @@ const List = () => {
 
     };
 
-    const handleReservation = (values) => {
+    const handleReservation = async(values) => {
         console.log(formValues);
 
     // Update reservation form with current form values
@@ -141,10 +146,20 @@ const List = () => {
 
     // Perform any asynchronous operations with the updated reservation form
     try {
-        const results = dispatch(reservationBooking(updatedReservationForm)).then(result => {
-            console.log('results: ', result.payload);
-            // Handle the result as needed
-        });
+        // const results = dispatch(reservationBooking(updatedReservationForm)).then(result => {
+        //     console.log('results: ', result.payload);
+        //     // Handle the result as needed
+        // });
+        const result = await dispatch(reservationBooking(updatedReservationForm));
+        console.log(result)
+        if(result.payload == undefined || result.payload == "" || result.payload == ''){
+            navigate('/');
+                notification.success({
+                    message: 'Logged In',
+                    description: 'Hello ' + result.payload['data']['name'],
+                });
+            
+        }
     } catch (error) {
         console.log('Error:', error);
     }

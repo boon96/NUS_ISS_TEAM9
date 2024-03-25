@@ -1,8 +1,10 @@
 import "./searchItem.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { AppDispatch } from "src/config/store";
 import axios from "axios";
+import ConfirmationModal from "../shared/UI/reservationPopup";
+import { DatePicker, InputNumber, Button, Form } from 'antd';
 
 const SearchItem = (props: any) => {
   //to call api
@@ -15,6 +17,8 @@ const SearchItem = (props: any) => {
 
   console.log("price: " , price);
   console.log("check in and checkout date: ", CheckDate);
+  const [isConfirmationVisible, setIsConfirmationVisible] = useState(false);
+
 
   // const fetchAllBooking = async()=>{
   //   try{
@@ -66,7 +70,18 @@ const SearchItem = (props: any) => {
           {/* price */}
           <span className="siTaxOp">Includes taxes and fees</span>
           {props.userLoggedIn ? (
-          <button className="siCheckButton" onClick={props.handleReservation}>Book Now</button>
+            <div>
+          {/* <button className="siCheckButton" onClick={props.handleReservation}>Book Now</button> */}
+          <Button type="primary" onClick={() => setIsConfirmationVisible(true)}>
+        Submit Reservation
+      </Button>
+      <ConfirmationModal
+        isVisible={isConfirmationVisible}
+        onConfirm={props.handleReservation}
+        onCancel={() => setIsConfirmationVisible(false)}
+        message="Are you sure you want to submit the reservation?"
+      />
+      </div>
           ):
           (
             <button className="siCheckButton" onClick={props.handleReservation}>See availability</button>
