@@ -70,8 +70,6 @@ export const CreateAccount = () => {
                     onFinishFailed={onFinishFailed}
                     autoComplete="off"
                 >
-                    {/* for date format */}
-                    {/* <Form.Item<FieldType> */}
                     <Form.Item<CreationForm>
                         label="Name"
                         name="name"
