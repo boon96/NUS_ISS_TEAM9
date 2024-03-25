@@ -10,24 +10,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-@RestController
-@RequestMapping("/api/customer")
-public class CustomerResource {
+    @RestController
+    @RequestMapping("/api/customer")
+    public class CustomerResource {
 
-    @Autowired //need this autowired if not service wont be connect to spring boot
-    private CustomerService customerService;
+        @Autowired //need this autowired if not service wont be connect to spring boot
+        private CustomerService customerService;
 
-    @PostMapping
-    public ResponseEntity<CustomerDTO> createCustomer(@RequestBody CustomerDTO customerDTO){
-        CustomerDTO savedCustomer = customerService.save(customerDTO);
-        return new ResponseEntity<>(savedCustomer, HttpStatus.CREATED);
+        @PostMapping
+        public ResponseEntity<CustomerDTO> createCustomer(@RequestBody CustomerDTO customerDTO){
+            CustomerDTO savedCustomer = customerService.save(customerDTO);
 
-    }
-    @GetMapping("{id}")
-    public ResponseEntity<CustomerDTO> getCustomer(@PathVariable("id") Long customerId){
-        CustomerDTO dto = customerService.get(customerId);
-        return ResponseEntity.ok(dto);
-    }
+            return new ResponseEntity<>(savedCustomer, HttpStatus.CREATED);
+
+        }
+        @GetMapping("{id}")
+        public ResponseEntity<CustomerDTO> getCustomer(@PathVariable("id") Long customerId){
+            CustomerDTO dto = customerService.get(customerId);
+            return ResponseEntity.ok(dto);
+        }
     @GetMapping
     public ResponseEntity <List<CustomerDTO>> getAllCustomer(){
         List<CustomerDTO> list = customerService.getAll();

@@ -127,7 +127,7 @@ const List = () => {
 
     //MOCK DATA 
     const totalPrice = 300;
-    const customerId = 1;
+    const customerId = Storage.session.get('customer').customerId;
     const roomId = 2;
 
     // Create an updated reservation form object with totalPrice, customerId, and roomId
@@ -166,6 +166,7 @@ const List = () => {
                     message: 'Reservation Created',
                     description: 'Reservation has been made',
                 });
+            clearSessionStorageExceptCustomer(); // Clear session storage except for customer
         }
     } catch (error) {
         console.log('Error:', error);
@@ -230,5 +231,15 @@ const List = () => {
         </div>
     );
 };
+// Function to clear session storage except for the customer
+const clearSessionStorageExceptCustomer = () => {
+    const customerData = Storage.session.get('customer');
+    for (let key in sessionStorage) {
+        if (key !== 'customer') {
+            sessionStorage.removeItem(key);
+        }
+    }
+    Storage.session.set('customer', customerData); // Set customer data back to session storage
+}
 
 export default List;

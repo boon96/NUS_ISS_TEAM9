@@ -12,7 +12,7 @@ import java.time.ZonedDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookingDTO {
+public class BookingDTO extends CustomerDTO {
     private Long bookId;
     private ZonedDateTime checkInDate;
     private ZonedDateTime checkOutDate;
@@ -23,4 +23,5 @@ public class BookingDTO {
     private Long customerId;
     private Long adminId;
     private Long roomId;
+
 }
