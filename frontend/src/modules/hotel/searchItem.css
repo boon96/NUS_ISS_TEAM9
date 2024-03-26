@@ -188,8 +188,19 @@
     width: 100%;
     font-weight: 500;
     cursor: pointer;
+
   }
   
   .listResult {
     flex: 3;
   }
+
+
+  /* .searchItemContainer {
+    overflow: auto;
+     height: 300px; 
+    width: 850px; 
+     white-space: nowrap;
+  } */
+
+  
