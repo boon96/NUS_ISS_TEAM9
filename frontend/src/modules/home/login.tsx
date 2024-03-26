@@ -61,9 +61,13 @@ export const HotelHome = () => {
                 <Form.Item
                     label="Enter Phone:"
                     name="phoneNumber"
-                    rules={[{ required: true, message: 'Please enter your phone number!' }]}
+                    rules={[{ required: true, message: 'Please enter your phone number!' },
+                    {
+                        pattern: /^[0-9]*$/,
+                        message: 'Please enter a valid phone number!',
+                    },]}
                 >
-                    <Input type="number" />
+                    <Input/>
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 6, span: 18 }}>
