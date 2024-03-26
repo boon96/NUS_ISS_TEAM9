@@ -40,6 +40,10 @@ public class BookingResource {
     @GetMapping("{id}")
     public ResponseEntity<BookingDTO> getBooking(@PathVariable("id") Long bookingId){
         BookingDTO dto = bookingService.get(bookingId);
+        CustomerDTO customerDTO = customerService.get(dto.getCustomerId());
+        dto.setName(customerDTO.getName());
+        dto.setEmailAddress(customerDTO.getEmailAddress());
+        dto.setPhoneNumber(customerDTO.getPhoneNumber());
         return ResponseEntity.ok(dto);
     }
     @GetMapping
