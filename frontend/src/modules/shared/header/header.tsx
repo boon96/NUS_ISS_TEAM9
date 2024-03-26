@@ -3,30 +3,30 @@ import { Storage } from 'react-jhipster';
 
 export const Header = () => {
 
-//   const isLogin = Storage.session.get('customer');
-//   const [userLoggedIn, setUserLoggedIn] = useState(false);
+  //   const isLogin = Storage.session.get('customer');
+  //   const [userLoggedIn, setUserLoggedIn] = useState(false);
 
-//   useEffect(() => {
-//     if (isLogin) {
-//       setUserLoggedIn(true);
-//       console.log(userLoggedIn);
-//       console.log("got user navbar");
-//       console.log(isLogin.name);
-      
-//     }
-//     else {
-//       setUserLoggedIn(false); // Update userLoggedIn state when user is not logged in
-//     }
-//     // window.location.reload();
-//   }, [userLoggedIn]);
+  //   useEffect(() => {
+  //     if (isLogin) {
+  //       setUserLoggedIn(true);
+  //       console.log(userLoggedIn);
+  //       console.log("got user navbar");
+  //       console.log(isLogin.name);
 
-//   const handleLogout = () => {
-//     // Perform logout actions here, such as clearing user session/storage
-//     // Example:
-//     sessionStorage.clear() // Assuming 'Storage' is from 'react-jhipster'
-//     window.location.reload();
-// };
-const isLogin = Storage.session.get('customer');
+  //     }
+  //     else {
+  //       setUserLoggedIn(false); // Update userLoggedIn state when user is not logged in
+  //     }
+  //     // window.location.reload();
+  //   }, [userLoggedIn]);
+
+  //   const handleLogout = () => {
+  //     // Perform logout actions here, such as clearing user session/storage
+  //     // Example:
+  //     sessionStorage.clear() // Assuming 'Storage' is from 'react-jhipster'
+  //     window.location.reload();
+  // };
+  const isLogin = Storage.session.get('customer');
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [refreshed, setRefreshed] = useState(false); // Flag to track if page has refreshed
 
@@ -90,8 +90,8 @@ const isLogin = Storage.session.get('customer');
           </ul>
         ) : (
           <div style={{ color: 'lime' }}>
-          <span style={{ color: 'lime' }}>Hello {isLogin.name}</span>
-          <span onClick={handleLogout} style={{ cursor: 'pointer' }}> Logout </span>
+            <span style={{ color: 'lime' }}>Hello {isLogin.name}</span>
+            <span onClick={handleLogout} style={{ cursor: 'pointer' }}> Logout </span>
           </div>
 
         )}

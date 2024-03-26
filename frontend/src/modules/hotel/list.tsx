@@ -7,7 +7,7 @@ import SearchItem from "./searchedItem";
 import { Storage } from 'react-jhipster';
 import moment, { Moment } from 'moment';
 import dayjs, { Dayjs } from 'dayjs';
-import { DatePicker, InputNumber, Button, Form, notification} from 'antd';
+import { DatePicker, InputNumber, Button, Form, notification } from 'antd';
 import { reservationBooking } from "./hotel.reducer";
 import { AppDispatch } from "src/config/store";
 import { useNavigate } from "react-router-dom";
@@ -15,18 +15,18 @@ import { useNavigate } from "react-router-dom";
 
 const List = () => {
     const { RangePicker } = DatePicker;
-        //to call api
-        const dispatch = AppDispatch();
-            //to navigate to other page
+    //to call api
+    const dispatch = AppDispatch();
+    //to navigate to other page
     const navigate = useNavigate();
     const checkInDate = Storage.session.get('checkInDate');
     const checkOutDate = Storage.session.get('checkOutDate');
     const searchedForm = Storage.session.get('searchedForm');
-    console.log("formvalues: " , searchedForm);
+    console.log("formvalues: ", searchedForm);
 
     const isLogin = Storage.session.get('customer');
     const [userLoggedIn, setUserLoggedIn] = useState(false);
-    
+
 
     useEffect(() => {
         if (isLogin) {
@@ -34,26 +34,26 @@ const List = () => {
             console.log("got user");
         }
     }, []);
-    
+
     interface FormValues {
         checkInDate?: Date;
         checkOutDate?: Date;
         minPrice?: number;
         maxPrice?: number;
-      }
-
-    interface IReservationForm{
-        checkInDate?: Date;
-        checkOutDate?: Date;
-        totalPrice? : number;
-        customerId?: number;
-        roomId?:  number;
     }
 
-    const[reservationForm, setReservationForm] = useState<IReservationForm>({
+    interface IReservationForm {
+        checkInDate?: Date;
+        checkOutDate?: Date;
+        totalPrice?: number;
+        customerId?: number;
+        roomId?: number;
+    }
+
+    const [reservationForm, setReservationForm] = useState<IReservationForm>({
         checkInDate: searchedForm.startDate,
         checkOutDate: searchedForm.endDate,
-    }); 
+    });
 
     const [formValues, setFormValues] = useState<FormValues>({
         checkInDate: searchedForm.startDate,
@@ -72,14 +72,14 @@ const List = () => {
 
     const handleDateChange = (dates) => {
         // setDateRange(dates); // Update the date range state whenever the user selects new dates
-            // if (dates && dates.length === 2) {
-            //   const startDate = dates[0].format('DD-MM-YYYY');
-            //   const endDate = dates[1].format('DD-MM-YYYY');
-            //   setFormValues({ startDate, endDate });
-            // }
-                if (dates && dates.length === 2) {
-                  setFormValues({ checkInDate: dates[0].toDate(), checkOutDate: dates[1].toDate() });
-                }
+        // if (dates && dates.length === 2) {
+        //   const startDate = dates[0].format('DD-MM-YYYY');
+        //   const endDate = dates[1].format('DD-MM-YYYY');
+        //   setFormValues({ startDate, endDate });
+        // }
+        if (dates && dates.length === 2) {
+            setFormValues({ checkInDate: dates[0].toDate(), checkOutDate: dates[1].toDate() });
+        }
     };
 
     const handlePriceChange = (fieldName) => (value) => {
@@ -98,8 +98,8 @@ const List = () => {
         //storage session customerid.
 
         // axios to search for hotel again
-    
-        
+
+
 
         // console.log("reservation form: ", reservationForm); // Log the updated reservationForm
 
@@ -119,59 +119,59 @@ const List = () => {
 
     };
 
-    const handleReservation = async(values) => {
+    const handleReservation = async (values) => {
         console.log(formValues);
 
-    // Update reservation form with current form values
-    setReservationForm(formValues);
+        // Update reservation form with current form values
+        setReservationForm(formValues);
 
-    //MOCK DATA 
-    const totalPrice = 300;
-    const customerId = Storage.session.get('customer').customerId;
-    const roomId = 2;
+        //MOCK DATA 
+        const totalPrice = 300;
+        const customerId = Storage.session.get('customer').customerId;
+        const roomId = 2;
 
-    // Create an updated reservation form object with totalPrice, customerId, and roomId
-    const updatedReservationForm: IReservationForm = {
-        ...formValues, // Spread the existing form values
-        totalPrice: totalPrice,
-        customerId: customerId,
-        roomId: roomId
-    };
+        // Create an updated reservation form object with totalPrice, customerId, and roomId
+        const updatedReservationForm: IReservationForm = {
+            ...formValues, // Spread the existing form values
+            totalPrice: totalPrice,
+            customerId: customerId,
+            roomId: roomId
+        };
 
-    // Update reservation form with the updated reservation form object
-    setReservationForm(updatedReservationForm);
+        // Update reservation form with the updated reservation form object
+        setReservationForm(updatedReservationForm);
 
-    // Log the updated reservationForm after setting it
-    console.log("Updated reservation form:", updatedReservationForm);
+        // Log the updated reservationForm after setting it
+        console.log("Updated reservation form:", updatedReservationForm);
 
-    // Perform any asynchronous operations with the updated reservation form
-    try {
-        // const results = dispatch(reservationBooking(updatedReservationForm)).then(result => {
-        //     console.log('results: ', result.payload);
-        //     // Handle the result as needed
-        // });
-        const result = await dispatch(reservationBooking(updatedReservationForm));
-        console.log(result)
-        if(result.payload == undefined || result.payload == null || result.payload == ''){
-            notification.error({
-                message: 'Error creating booking',
-                description: 'Failed to reserve room. Please try again later.',
-            });
-            
-        } else{
-            console.log("success")
-            const data = result.payload['data'];
-            navigate('/summary', { state: { data } });
+        // Perform any asynchronous operations with the updated reservation form
+        try {
+            // const results = dispatch(reservationBooking(updatedReservationForm)).then(result => {
+            //     console.log('results: ', result.payload);
+            //     // Handle the result as needed
+            // });
+            const result = await dispatch(reservationBooking(updatedReservationForm));
+            console.log(result)
+            if (result.payload == undefined || result.payload == null || result.payload == '') {
+                notification.error({
+                    message: 'Error creating booking',
+                    description: 'Failed to reserve room. Please try again later.',
+                });
+
+            } else {
+                console.log("success")
+                const data = result.payload['data'];
+                navigate('/summary', { state: { data } });
                 notification.success({
                     message: 'Reservation Created',
                     description: 'Reservation has been made',
                 });
-            clearSessionStorageExceptCustomer(); // Clear session storage except for customer
+                clearSessionStorageExceptCustomer(); // Clear session storage except for customer
+            }
+        } catch (error) {
+            console.log('Error:', error);
         }
-    } catch (error) {
-        console.log('Error:', error);
-    }
-};
+    };
 
     return (
         <div>
@@ -180,7 +180,7 @@ const List = () => {
                     <div className="listSearch">
                         <h1 className="lsTitle">Search</h1>
                         <div className="lsItem">
-                        <label>Check-in/Check-out Date</label>
+                            <label>Check-in/Check-out Date</label>
                             <Form onFinish={handleSubmit}>
                                 <Form.Item>
                                     <RangePicker
@@ -189,7 +189,7 @@ const List = () => {
                                         showTime={false}
                                         // value={[defaultStartDateDayjs,defaultEndDateDayjs]}
                                         // defaultPickerValue={[defaultStartDateDayjs, defaultEndDateDayjs]}
-                                        defaultValue={[defaultStartDateDayjs,defaultEndDateDayjs]}
+                                        defaultValue={[defaultStartDateDayjs, defaultEndDateDayjs]}
                                         onChange={handleDateChange} // Call handleDateChange on date selection change
                                     />
                                 </Form.Item>
@@ -200,17 +200,17 @@ const List = () => {
                                             <span className="lsOptionText">
                                                 Min price <small>per night</small>
                                             </span>
-                                            <InputNumber 
-                                            value={formValues.minPrice}
-                                            onChange={handlePriceChange('minPrice')} />
+                                            <InputNumber
+                                                value={formValues.minPrice}
+                                                onChange={handlePriceChange('minPrice')} />
                                         </div>
                                         <div className="lsOptionItem">
                                             <span className="lsOptionText">
                                                 Max price <small>per night</small>
                                             </span>
-                                            <InputNumber 
-                                             value={formValues.maxPrice}
-                                             onChange={handlePriceChange('maxPrice')}/>
+                                            <InputNumber
+                                                value={formValues.maxPrice}
+                                                onChange={handlePriceChange('maxPrice')} />
                                         </div>
                                     </div>
                                 </div>
@@ -224,7 +224,7 @@ const List = () => {
                     </div>
                     <div className="listResult">
                         <SearchItem price={10} dates={formValues}
-                        handleSubmit={handleSubmit} handleReservation={handleReservation} userLoggedIn={userLoggedIn}/>
+                            handleSubmit={handleSubmit} handleReservation={handleReservation} userLoggedIn={userLoggedIn} />
                     </div>
                 </div>
             </div>
