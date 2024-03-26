@@ -47,6 +47,28 @@ export const reservationBooking = createAsyncThunk(
     }
 )
 
+export const searchBooking = createAsyncThunk(
+    'search/booking',
+    async(searchId: any) =>{
+        try{
+            console.log(searchId);
+            return(await axios.get('api/booking/' + searchId
+            // ,{
+            //     headers:{
+            //         "Content-Type": "application/json",
+            //     },
+            // }
+            )
+            // return(await axios.get('api/room')
+            // return response;
+            )
+        }catch(error){
+            throw error;
+        }
+    }
+)
+
+
 
 export const HotelStateSlice = createSlice({
     name: 'hotel-search',
@@ -70,6 +92,13 @@ export const HotelStateSlice = createSlice({
             state.activationFailure = true;
         })
         .addCase(reservationBooking.fulfilled, state => {
+            state.activationSuccess = true;
+        })
+        .addCase(searchBooking.pending, () => initialState)
+        .addCase(searchBooking.rejected, state => {
+            state.activationFailure = true;
+        })
+        .addCase(searchBooking.fulfilled, state => {
             state.activationSuccess = true;
         });
     },

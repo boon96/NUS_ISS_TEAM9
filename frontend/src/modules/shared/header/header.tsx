@@ -72,7 +72,7 @@ const isLogin = Storage.session.get('customer');
             <a className="nav-link" href="/contactus">Contact</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/contactus">Search for Bookings</a>
+            <a className="nav-link" href="/search">Search for Bookings</a>
           </li>
         </ul>
         {/* Move these items to the right */}

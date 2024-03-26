@@ -3,7 +3,6 @@ import AppRoutes from './routes';
 import HotelHome from './modules/home/login';
 import { HotelBooking } from './modules/hotel/booking';
 import Hotel from './modules/hotel/hotel';
-//  import Hotel from './modules/hotel/Hotel';
 import Header from './modules/shared/header/header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ContactUsPage from './modules/home/contactUs';

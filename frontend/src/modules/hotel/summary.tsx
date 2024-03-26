@@ -9,6 +9,8 @@ export const SummaryPage = () => {
     const navigate = useNavigate();
     const result = location.state?.data;
 
+    console.log(result);
+
    
    const formatDate = (dateString)=> {
     const date = new Date(dateString);
