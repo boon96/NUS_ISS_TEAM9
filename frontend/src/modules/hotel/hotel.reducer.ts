@@ -61,7 +61,19 @@ export const searchBooking = createAsyncThunk(
     }
 )
 
-
+export const deleteBooking = createAsyncThunk(
+    'delete/booking',
+    async (bookingId: any) => {
+        try {
+            console.log(bookingId);
+            return (await axios.delete('api/booking/' + bookingId
+            )
+            )
+        } catch (error) {
+            throw error;
+        }
+    }
+)
 
 export const HotelStateSlice = createSlice({
     name: 'hotel-search',
@@ -92,6 +104,13 @@ export const HotelStateSlice = createSlice({
                 state.activationFailure = true;
             })
             .addCase(searchBooking.fulfilled, state => {
+                state.activationSuccess = true;
+            })
+            .addCase(deleteBooking.pending, () => initialState)
+            .addCase(deleteBooking.rejected, state => {
+                state.activationFailure = true;
+            })
+            .addCase(deleteBooking.fulfilled, state => {
                 state.activationSuccess = true;
             });
     },

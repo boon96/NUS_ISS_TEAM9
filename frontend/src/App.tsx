@@ -9,8 +9,8 @@ import ContactUsPage from './modules/home/contactUs';
 import AboutUsPage from './modules/home/aboutUs';
 import HotelConfirmation from './modules/hotel/confirmation';
 import CreateAccount from './modules/home/create';
-import SummaryPage from './modules/hotel/summary';
 import SearchBooking from './modules/hotel/searchBooking';
+import SummaryResult from './modules/hotel/summaryResult';
 
 export const App = () => {
   const baseHref = document.querySelector('base')?.getAttribute('href')?.replace(/\/$/,'');
@@ -28,8 +28,9 @@ export const App = () => {
         <Route path="/aboutus" element={<AboutUsPage />} />
         <Route path="/hotel/confirmation" element={<HotelConfirmation />} />
         <Route path="/register" element={<CreateAccount />} />
-        <Route path="/summary" element={<SummaryPage />} />
+        {/* <Route path="/summary" element={<SummaryPage />} /> */}
         <Route path="/search" element={<SearchBooking />} />
+        <Route path="/summary" element={<SummaryResult />} />
           {/* <AppRoutes /> Use AppRoutes directly */}
         </Routes>
       </BrowserRouter>

@@ -161,7 +161,7 @@ const List = () => {
             } else {
                 console.log("success")
                 const data = result.payload['data'];
-                navigate('/summary', { state: { data } });
+                navigate('/summary', { state: { data :data, modify: false } });
                 notification.success({
                     message: 'Reservation Created',
                     description: 'Reservation has been made',

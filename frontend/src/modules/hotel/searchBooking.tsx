@@ -8,11 +8,10 @@ import { useNavigate } from "react-router-dom";
 export const SearchBooking = () => {
     const dispatch = AppDispatch();
     //to navigate to other page
-const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const [form] = Form.useForm(); // Form instance
     const [loading, setLoading] = useState(false); // State to manage loading state
-
 
     const handleSearch = async () => {
         try {
@@ -35,7 +34,8 @@ const navigate = useNavigate();
                     description: 'Booking with ID ' + values.bookingId + ' found.',
                 });
                 const data = result.payload['data']
-                navigate('/summary', { state: { data } })
+
+                navigate('/summary', { state: { data: data, modify: true } })
             }
 
             // Reset the form
@@ -54,7 +54,7 @@ const navigate = useNavigate();
 
     return (
         <section className="m-8">
-            <HotelHeader/>
+            <HotelHeader />
             <Card title="Search Booking" style={{ width: 700, margin: 'auto' }}>
                 <Form form={form} layout="vertical">
                     <Form.Item

@@ -42,7 +42,7 @@ export const HotelHome = () => {
         <section className="m-8">
         <HotelHeader/>
 
-        <Card style={{ width: 700, margin: 'auto' }}>
+        <Card title="Sign In" style={{ width: 700, margin: 'auto' }}>
 
             <Form
                 form={form}
@@ -68,7 +68,7 @@ export const HotelHome = () => {
 
                 <Form.Item wrapperCol={{ offset: 6, span: 18 }}>
                     <Button type="primary" htmlType="submit">
-                        Submit
+                        Login
                     </Button>
                 </Form.Item>
             </Form>
