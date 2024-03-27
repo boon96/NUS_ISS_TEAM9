@@ -13,7 +13,7 @@ import { AppDispatch } from "src/config/store";
 import { useNavigate } from "react-router-dom";
 
 
-const List = () => {
+const List = (props) => {
     const { RangePicker } = DatePicker;
     //to call api
     const dispatch = AppDispatch();
@@ -232,7 +232,7 @@ const List = () => {
                         </div>
                     </div>
                     <div className="listResult">
-                        <SearchItem price={10} dates={formValues}
+                        <SearchItem price={10} dates={formValues} roomData={props.roomData}
                             handleReservation={handleReservation} userLoggedIn={userLoggedIn} daysInHotel={daysInHotel} />
                     </div>
                 </div>

@@ -13,14 +13,15 @@ import List from "./list";
 const Hotel = () => {
     // const {setPage} = useContext(GlobalContext)
     const { id } = useParams();
-    const location = useLocation()
+    const location = useLocation();
+    const roomData = location.state?.roomData;
     return (
         <div className="m-8">
         {/* // <PageContainer style={{maxWidth: "1200px", marginLeft: "auto", marginRight: "auto"}}> */}
             {/* <HotelDetails hotel={hotel} params={location.state}/> */}
             {/* <HotelDetails /> */}
             <div className="listItem">
-                <List/>
+                <List roomData={roomData}/>
             {/* <SearchItem/> */}
             </div>
         {/* // </PageContainer> */}

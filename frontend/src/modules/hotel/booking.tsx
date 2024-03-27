@@ -60,6 +60,20 @@ export const HotelBooking = () => {
                 console.log('results: ', result.payload);
                 // if status 400 do something,
                 // if status 400 navigate ( storage session etc)
+                if (result.payload['status'] == 200) {
+                    Storage.session.set('checkInDate', formValues.startDate);
+                    Storage.session.set('checkOutDate', formValues.endDate);
+                    Storage.session.set('searchedForm', formValues);
+                    // Storage.session.set('adults',adults);
+                    const roomData = result.payload['data'];
+                    navigate('/hotel', { state: { roomData }});
+                }
+                else {
+                    notification.error({
+                        message: 'Error',
+                        description: 'Failed to retrieve rooms',
+                    });
+                }
 
             });
         } catch (error) {
@@ -67,11 +81,7 @@ export const HotelBooking = () => {
             console.log('Error data:', error.response); // Log the error response body
             console.log('failed result');
         }
-        Storage.session.set('checkInDate', formValues.startDate);
-        Storage.session.set('checkOutDate', formValues.endDate);
-        Storage.session.set('searchedForm', formValues);
-        // Storage.session.set('adults',adults);
-        navigate('/hotel');
+
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -80,7 +90,7 @@ export const HotelBooking = () => {
 
     return (
         <section className="m-8">
-            <HotelHeader/>
+            <HotelHeader />
 
             <Card title="Book your stay here" style={{ width: 600, margin: 'auto' }}>
                 <Form

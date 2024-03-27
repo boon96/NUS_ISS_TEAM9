@@ -17,29 +17,13 @@ const SearchItem = (props: any) => {
   const CheckDate = props.dates;
   const price = props.price;
 
+  console.log("data: ", props.roomData);
   console.log("price: ", price);
   console.log("check in and checkout date: ", CheckDate);
   const [isConfirmationVisible, setIsConfirmationVisible] = useState(false);
 
-  // const fetchAllBooking = async()=>{
-  //   try{
-  //     const url = '/api/booking';
-  //     const response = await  axios.get(url);
-  //     const data = response.data;
-  //     console.log("Booking data is ", data);
-  //   }catch(error){
-  //     console.log("Error fetching all booking", error);
-  //   }
-  // }
-
-  // useEffect(()=>{
-  //   fetchAllBooking();
-  // },[]);
-  //retrieve details of searched item
-
-  console.log(mockData)
-  const filteredMockData = mockData.filter(item => {
-    // Filter out items where description is 'test'
+  const filteredData = props.roomData.filter(item => {
+    // Filter out items where description is 'unavailable'
     return item.status !== 'Unavailable';
   });
 
@@ -54,7 +38,7 @@ const SearchItem = (props: any) => {
   }
 
   const [isConfirmationVisibleArray, setIsConfirmationVisibleArray] = useState(
-    Array(Math.ceil(mockData.length / 3)).fill(false).map(() => Array(3).fill(false))
+    Array(Math.ceil(filteredData.length / 3)).fill(false).map(() => Array(3).fill(false))
   );
 
   // Function to toggle the visibility of the confirmation modal for a specific item
@@ -68,8 +52,8 @@ const SearchItem = (props: any) => {
 
   // Function to chunk the mockData into rows of 3 items
   const chunkedData = [];
-  for (let i = 0; i < filteredMockData.length; i += 3) {
-    chunkedData.push(filteredMockData.slice(i, i + 3));
+  for (let i = 0; i < filteredData.length; i += 3) {
+    chunkedData.push(filteredData.slice(i, i + 3));
   }
 
   return (
