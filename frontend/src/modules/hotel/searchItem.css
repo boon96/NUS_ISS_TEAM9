@@ -9,8 +9,10 @@
   }
   
   .siImg {
-    width: 200px;
-    height: 200px;
+    /* width: 200px;
+    height: 200px; */
+    width: 100%;
+    height: auto;
     object-fit: cover;
   }
   
@@ -108,8 +110,6 @@
     border-radius: 5px;
   }
 
-
-
   .listContainer {
     display: flex;
     justify-content: center;
@@ -131,6 +131,7 @@
     position: sticky;
     top: 10px;
     height: max-content;
+    min-width: 250px;
   }
   
   .lsTitle{
@@ -188,19 +189,20 @@
     width: 100%;
     font-weight: 500;
     cursor: pointer;
+  }
 
+  .searchItemContainer {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .searchItemRow {
+    display: flex;
+
+  }
+  .searchItemContent {
+    width: 33.33%;
+    padding: 10px;
   }
   
-  .listResult {
-    flex: 3;
-  }
-
-
-  /* .searchItemContainer {
-    overflow: auto;
-     height: 300px; 
-    width: 850px; 
-     white-space: nowrap;
-  } */
-
   
