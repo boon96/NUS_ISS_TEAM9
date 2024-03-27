@@ -26,6 +26,7 @@ const List = () => {
 
     const isLogin = Storage.session.get('customer');
     const [userLoggedIn, setUserLoggedIn] = useState(false);
+    const [daysInHotel, setDaysInHotel] = useState(0);
 
 
     useEffect(() => {
@@ -63,6 +64,13 @@ const List = () => {
     // const defaultEndDate = moment(searchedForm.endDate, 'DD-MM-YYYY').toDate(); // Convert Moment.js object to Date object
 
     console.log("defaultStartDate: ", searchedForm.startDate);
+    // setDaysInHotel(calculateDay(formValues.checkInDate,formValues.checkOutDate));
+
+    useEffect(() => {
+        setDaysInHotel(calculateDay(formValues.checkInDate, formValues.checkOutDate));
+    }, []);
+
+
     const defaultStartDateDayjs = dayjs(searchedForm.startDate); // Convert Date object to Day.js object
     const defaultEndDateDayjs = dayjs(searchedForm.endDate); // Convert Date object to Day.js object
 
@@ -119,14 +127,15 @@ const List = () => {
 
     };
 
-    const handleReservation = async (room,price) => {
+    const handleReservation = async (room, price) => {
         console.log(formValues);
 
         // Update reservation form with current form values
         setReservationForm(formValues);
+        // const daysInHotel = calculateDay(formValues.checkInDate,formValues.checkOutDate);
 
         //MOCK DATA 
-        const totalPrice = price;
+        const totalPrice = price * daysInHotel;
         const customerId = Storage.session.get('customer').customerId;
         const roomId = room;
 
@@ -180,6 +189,7 @@ const List = () => {
                     <div className="listSearch">
                         <h1 className="lsTitle">Search</h1>
                         <div className="lsItem">
+                            <label>Date in Hotel: {daysInHotel}</label>
                             <label>Check-in/Check-out Date</label>
                             <Form onFinish={handleSubmit}>
                                 <Form.Item>
@@ -209,7 +219,7 @@ const List = () => {
                                                 Max price <small>per night</small>
                                             </span>
                                             <InputNumber
-                                            
+
                                                 value={formValues.maxPrice}
                                                 onChange={handlePriceChange('maxPrice')} />
                                         </div>
@@ -225,7 +235,7 @@ const List = () => {
                     </div>
                     <div className="listResult">
                         <SearchItem price={10} dates={formValues}
-                            handleSubmit={handleSubmit} handleReservation={handleReservation} userLoggedIn={userLoggedIn} />
+                            handleSubmit={handleSubmit} handleReservation={handleReservation} userLoggedIn={userLoggedIn} daysInHotel={daysInHotel} />
                     </div>
                 </div>
             </div>
@@ -241,6 +251,23 @@ const clearSessionStorageExceptCustomer = () => {
         }
     }
     Storage.session.set('customer', customerData); // Set customer data back to session storage
+}
+
+const calculateDay = (checkInDate, checkOutDate) => {
+
+
+    const checkInDate1 = new Date(checkInDate);
+    const checkOutDate2 = new Date(checkOutDate);
+
+    // Calculate the difference in milliseconds
+    const differenceInMilliseconds = checkOutDate2.getTime() - checkInDate1.getTime();
+
+    // Convert milliseconds to days
+    const differenceInDays = Math.ceil(differenceInMilliseconds / (1000 * 60 * 60 * 24)) + 1;
+
+    console.log("Difference in days:", differenceInDays);
+
+    return differenceInDays
 }
 
 export default List;

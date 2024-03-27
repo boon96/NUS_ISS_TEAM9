@@ -87,7 +87,7 @@ const SearchItem = (props: any) => {
               </div>
               <div className="siDetails">
                 <div className="siDetailTexts">
-                  <span className="siPrice">${item.price}</span>
+                  <span className="siPrice">${item.price * props.daysInHotel}</span>
                   <span className="siTaxOp">Includes taxes and fees</span>
                   {props.userLoggedIn ? (
                     <div>
