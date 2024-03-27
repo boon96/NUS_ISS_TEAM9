@@ -119,7 +119,7 @@ const List = () => {
 
     };
 
-    const handleReservation = async (values) => {
+    const handleReservation = async (room) => {
         console.log(formValues);
 
         // Update reservation form with current form values
@@ -128,7 +128,7 @@ const List = () => {
         //MOCK DATA 
         const totalPrice = 300;
         const customerId = Storage.session.get('customer').customerId;
-        const roomId = 2;
+        const roomId = room;
 
         // Create an updated reservation form object with totalPrice, customerId, and roomId
         const updatedReservationForm: IReservationForm = {
@@ -209,6 +209,7 @@ const List = () => {
                                                 Max price <small>per night</small>
                                             </span>
                                             <InputNumber
+                                            
                                                 value={formValues.maxPrice}
                                                 onChange={handlePriceChange('maxPrice')} />
                                         </div>
