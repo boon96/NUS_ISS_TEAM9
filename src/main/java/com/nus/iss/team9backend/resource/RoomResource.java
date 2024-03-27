@@ -1,8 +1,13 @@
 package com.nus.iss.team9backend.resource;
 
+import com.nus.iss.team9backend.dto.CustomerDTO;
 import com.nus.iss.team9backend.dto.RoomDTO;
+import com.nus.iss.team9backend.dto.RoomTypeDTO;
 import com.nus.iss.team9backend.dto.RoomDTO;
+import com.nus.iss.team9backend.service.CustomerService;
 import com.nus.iss.team9backend.service.RoomService;
+import com.nus.iss.team9backend.service.RoomTypeService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +20,9 @@ import java.util.List;
 public class RoomResource {
     @Autowired //need this autowired if not service wont be connect to spring boot
     private RoomService roomService;
+
+    @Autowired
+    private RoomTypeService roomTypeService;
 
     @PostMapping
     public ResponseEntity<RoomDTO> createRoom(@RequestBody RoomDTO roomDTO){
@@ -31,6 +39,14 @@ public class RoomResource {
     @GetMapping
     public ResponseEntity <List<RoomDTO>> getAllRoom(){
         List<RoomDTO> list = roomService.getAll();
+        // RoomTypeDTO roomTypeList = roomTypeService.get(list.get(0).getRoomTypeId());
+        list.forEach(room -> {
+            RoomTypeDTO roomType = roomTypeService.get(room.getRoomTypeId());
+            room.setRoomTypeId(roomType.getRoomTypeId()); // Assuming there's a setter method for roomType in RoomDTO
+            room.setName(roomType.getName());
+            room.setDescription(roomType.getDescription());
+            room.setPrice(roomType.getPrice());
+        });
         return ResponseEntity.ok(list);
 
     }

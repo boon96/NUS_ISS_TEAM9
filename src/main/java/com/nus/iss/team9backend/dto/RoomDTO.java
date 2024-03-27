@@ -5,7 +5,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RoomDTO {
+public class RoomDTO extends RoomTypeDTO{
     private Long roomId;
     private String location;
     private String status;
