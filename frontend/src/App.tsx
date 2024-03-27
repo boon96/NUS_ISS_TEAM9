@@ -7,7 +7,6 @@ import Header from './modules/shared/header/header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ContactUsPage from './modules/home/contactUs';
 import AboutUsPage from './modules/home/aboutUs';
-import HotelConfirmation from './modules/hotel/confirmation';
 import CreateAccount from './modules/home/create';
 import SearchBooking from './modules/hotel/searchBooking';
 import SummaryResult from './modules/hotel/summaryResult';
@@ -26,7 +25,6 @@ export const App = () => {
         <Route path="/login" element={<HotelHome />} />
         <Route path="/contactus" element={<ContactUsPage />} />
         <Route path="/aboutus" element={<AboutUsPage />} />
-        <Route path="/hotel/confirmation" element={<HotelConfirmation />} />
         <Route path="/register" element={<CreateAccount />} />
         {/* <Route path="/summary" element={<SummaryPage />} /> */}
         <Route path="/search" element={<SearchBooking />} />

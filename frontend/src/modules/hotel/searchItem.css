@@ -32,15 +32,6 @@
     font-size: 12px;
   }
   
-  .siTaxiOp {
-    font-size: 12px;
-    background-color: #008009;
-    color: white;
-    width: max-content;
-    padding: 3px;
-    border-radius: 5px;
-  }
-  
   .siSubtitle{
     font-size: 12px;
     font-weight: bold;
@@ -205,4 +196,19 @@
     padding: 10px;
   }
   
+  .siFeaturesContainer {
+    display: flex;
+    flex-wrap: wrap;
+  }
   
+  .siFeatureLabel {
+    font-size: 12px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    padding: 3px 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #008009;
+    color: white;
+    width: max-content;
+  }

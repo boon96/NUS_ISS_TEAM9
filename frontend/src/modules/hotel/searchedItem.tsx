@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { AppDispatch } from "src/config/store";
 import axios from "axios";
 import ConfirmationModal from "../shared/UI/reservationPopup";
-import { DatePicker, InputNumber, Button, Form } from 'antd';
+import { DatePicker, InputNumber, Button, Form, notification } from 'antd';
 import { mockData } from "src/resources/mockdata";
+import { Storage } from 'react-jhipster';
 
 const SearchItem = (props: any) => {
   //to call api
@@ -19,7 +20,6 @@ const SearchItem = (props: any) => {
   console.log("price: ", price);
   console.log("check in and checkout date: ", CheckDate);
   const [isConfirmationVisible, setIsConfirmationVisible] = useState(false);
-
 
   // const fetchAllBooking = async()=>{
   //   try{
@@ -40,7 +40,13 @@ const SearchItem = (props: any) => {
   console.log(mockData)
 
   const onClickFunction = () => {
-    navigate('/hotel/confirmation')
+    console.log(Storage.session.get('customer'));
+    if(Storage.session.get('customer') === null || Storage.session.get('customer') === undefined){
+      notification.error({
+        message: 'Account missing',
+        description: 'Please register an Account or Sign in first.',
+    });
+    }
   }
 
   const [isConfirmationVisibleArray, setIsConfirmationVisibleArray] = useState(
@@ -78,8 +84,15 @@ const SearchItem = (props: any) => {
               />
               <div className="siDesc">
                 <h1 className="siTitle">{item.name}</h1>
-                <span className="siDistance">500m from center</span>
-                <span className="siTaxiOp">Free airport taxi</span>
+                <span className="siDistance">500m from airport</span>
+                <div className="siFeaturesContainer">
+
+                  <div className="siFeatureLabel">Free airport taxi</div>
+                  <div className="siFeatureLabel">Free Wi-Fi</div>
+                  <div className="siFeatureLabel">Free breakfast</div>
+                  <div className="siFeatureLabel">Swimming pool</div>
+                  {/* Add more features as needed */}
+                </div>
                 <span className="siSubtitle">{item.status}</span>
                 <span className="siFeatures">{item.description}</span>
                 <span className="siCancelOp">Free cancellation</span>

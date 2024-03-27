@@ -141,7 +141,7 @@ export const mockData = [
         "price": 80.0,
         "roomId": 29,
         "location": "LEVEL 2",
-        "status": "Available"
+        "status": "Unavailable"
     },
     {
         "roomTypeId": 5,

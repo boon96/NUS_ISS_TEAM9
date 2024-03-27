@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HotelHeader from "./hotelHeader";
 import { Card, Button, Form, notification } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -12,6 +12,15 @@ export const SummaryPage = (props) => {
     const dispatch = AppDispatch();
     const navigate = useNavigate();
     const [isConfirmationVisible, setIsConfirmationVisible] = useState(false);
+    const isLogin = Storage.session.get('customer');
+    const [userLoggedIn, setUserLoggedIn] = useState(false);
+
+
+    useEffect(() => {
+        if (isLogin) {
+            setUserLoggedIn(true);
+        }
+    }, []);
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
@@ -85,7 +94,7 @@ export const SummaryPage = (props) => {
                 <div style={{ marginTop: '20px' }}>
                     <Button type="primary" onClick={handleHomeButtonClick}>Home</Button>
                     <Button style={{ marginLeft: '10px' }} onClick={handlePrintButtonClick}>Print</Button>
-                    {props.modify && (
+                    {props.modify && userLoggedIn && (
                         <><Button
                             style={{ marginLeft: '10px' }}
                             danger

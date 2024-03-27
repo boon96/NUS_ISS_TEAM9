@@ -104,15 +104,6 @@ export const HotelBooking = () => {
                             format="DD-MM-YYYY"
                             disabledDate={(current) => current && current < moment().endOf('day')}
                             showTime={false}
-                            // onChange={(dates) => {
-                            //     if (dates && dates.length === 2) {
-                            //     //   const startDate = dates[0].format('DD-MM-YYYY');
-                            //     const startDate = dates[0];
-                            //     const endDate = dates[1];
-                            //     //   const endDate = dates[1].format('DD-MM-YYYY');
-                            //       setFormValues({ startDate, endDate });
-                            //     }
-                            //   }}
                             //for date format
                             onChange={(dates) => {
                                 if (dates && dates.length === 2) {
@@ -122,13 +113,6 @@ export const HotelBooking = () => {
 
                         />
                     </Form.Item>
-                    {/* <Form.Item<FieldType>
-                        label="Number of Adults"
-                        name="adults"
-                        rules={[{ required: true, message: 'Please input number of adults!' }]}
-                    >
-                        <InputNumber style={{ width: '100%' }} min={1} />
-                    </Form.Item> */}
                     <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                         <Button type="primary" htmlType="submit">
                             Submit
