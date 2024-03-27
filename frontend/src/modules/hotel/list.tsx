@@ -11,6 +11,7 @@ import { DatePicker, InputNumber, Button, Form, notification } from 'antd';
 import { reservationBooking } from "./hotel.reducer";
 import { AppDispatch } from "src/config/store";
 import { useNavigate } from "react-router-dom";
+import { roomSearch } from "./hotel.reducer";
 
 
 const List = (props) => {
@@ -79,28 +80,36 @@ const List = (props) => {
     console.log(dateRange);
 
     const handleDateChange = (dates) => {
-        // setDateRange(dates); // Update the date range state whenever the user selects new dates
-        // if (dates && dates.length === 2) {
-        //   const startDate = dates[0].format('DD-MM-YYYY');
-        //   const endDate = dates[1].format('DD-MM-YYYY');
-        //   setFormValues({ startDate, endDate });
-        // }
         if (dates && dates.length === 2) {
             setFormValues({ checkInDate: dates[0].toDate(), checkOutDate: dates[1].toDate() });
         }
     };
 
-    const handlePriceChange = (fieldName) => (value) => {
-        setFormValues(prevState => ({
-            ...prevState,
-            [fieldName]: value
-        }));
+    const handlePriceChange = (type) => (value) => {
+        if (type === 'minPrice' && value > formValues.maxPrice) {
+            setFormValues({
+                ...formValues,
+                minPrice: formValues.maxPrice, // Set min price to max price
+            });
+        } else if (type === 'maxPrice' && value < formValues.minPrice) {
+            setFormValues({
+                ...formValues,
+                maxPrice: formValues.minPrice, // Set max price to min price
+            });
+        } else {
+            setFormValues({
+                ...formValues,
+                [type]: value,
+            });
+        }
     };
 
-    const handleSearch = (values) => {
+    const handleSearch = async () => {
         console.log("Form values:", formValues); // Form values will contain the selected date range
         console.log("Selected date range:", dateRange); // You can also directly log the state variable directly
+        const results = await dispatch(roomSearch(formValues));
 
+        console.log(results);
         //check in and checkout date
         //total price
         //storage session customerid.
@@ -110,11 +119,11 @@ const List = (props) => {
         // console.log("reservation form: ", reservationForm); // Log the updated reservationForm
 
         // try {
-        //     // let result = await dispatch(findFmsByPSPNoSubNoHsCode(formValues));
+        //     // let result = await dispatch(test(formValues));
         //     const results = dispatch(reservationBooking(reservationForm)).then(result => {
         //         console.log('results: ', result.payload);
         //         // if status 400 do something,
-        //         // if status 400 navigate ( storage session etc)
+        //         // if status 200 navigate ( storage session etc)
 
         //     });
         // } catch (error) {
@@ -168,7 +177,7 @@ const List = (props) => {
             } else {
                 console.log("success")
                 const data = result.payload['data'];
-                navigate('/summary', { state: { data :data, modify: false } });
+                navigate('/summary', { state: { data: data, modify: false } });
                 notification.success({
                     message: 'Reservation Created',
                     description: 'Reservation has been made',
