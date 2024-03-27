@@ -48,7 +48,7 @@ const SearchItem = (props: any) => {
   );
 
   // Function to toggle the visibility of the confirmation modal for a specific item
-  const toggleConfirmationModal = (roomId, rowIndex, itemIndex) => {
+  const toggleConfirmationModal = (roomId, price, rowIndex, itemIndex) => {
     setIsConfirmationVisibleArray((prevState) => {
       const newState = [...prevState];
       newState[rowIndex][itemIndex] = !newState[rowIndex][itemIndex];
@@ -91,13 +91,13 @@ const SearchItem = (props: any) => {
                   <span className="siTaxOp">Includes taxes and fees</span>
                   {props.userLoggedIn ? (
                     <div>
-                      <Button type="primary" onClick={() => toggleConfirmationModal(item.roomId, rowIndex, itemIndex)}>
+                      <Button type="primary" onClick={() => toggleConfirmationModal(item.roomId, item.price, rowIndex, itemIndex)}>
   Submit Reservation
 </Button>
 <ConfirmationModal
   isVisible={isConfirmationVisibleArray[rowIndex][itemIndex]}
-  onConfirm={() => props.handleReservation(item.roomId)}
-  onCancel={() => toggleConfirmationModal(item.roomId, rowIndex, itemIndex)}
+  onConfirm={() => props.handleReservation(item.roomId, item.price)}
+  onCancel={() => toggleConfirmationModal(item.roomId, item.price, rowIndex, itemIndex)}
   message={`Are you sure you want to submit the reservation for ${item.name}?`}
 />
                     </div>

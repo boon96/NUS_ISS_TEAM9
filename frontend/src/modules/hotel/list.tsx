@@ -119,14 +119,14 @@ const List = () => {
 
     };
 
-    const handleReservation = async (room) => {
+    const handleReservation = async (room,price) => {
         console.log(formValues);
 
         // Update reservation form with current form values
         setReservationForm(formValues);
 
         //MOCK DATA 
-        const totalPrice = 300;
+        const totalPrice = price;
         const customerId = Storage.session.get('customer').customerId;
         const roomId = room;
 
