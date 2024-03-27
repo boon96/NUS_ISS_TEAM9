@@ -42,7 +42,7 @@ const SearchItem = (props: any) => {
   const onClickFunction = () => {
     navigate('/hotel/confirmation')
   }
-  
+
   const [isConfirmationVisibleArray, setIsConfirmationVisibleArray] = useState(
     Array(Math.ceil(mockData.length / 3)).fill(false).map(() => Array(3).fill(false))
   );
@@ -64,7 +64,7 @@ const SearchItem = (props: any) => {
 
   return (
 
-  <div className="searchItemContainer">
+    <div className="searchItemContainer">
       {/* Render each row */}
       {chunkedData.map((row, rowIndex) => (
         <div key={rowIndex} className="searchItemRow">
@@ -92,14 +92,14 @@ const SearchItem = (props: any) => {
                   {props.userLoggedIn ? (
                     <div>
                       <Button type="primary" onClick={() => toggleConfirmationModal(item.roomId, item.price, rowIndex, itemIndex)}>
-  Submit Reservation
-</Button>
-<ConfirmationModal
-  isVisible={isConfirmationVisibleArray[rowIndex][itemIndex]}
-  onConfirm={() => props.handleReservation(item.roomId, item.price)}
-  onCancel={() => toggleConfirmationModal(item.roomId, item.price, rowIndex, itemIndex)}
-  message={`Are you sure you want to submit the reservation for ${item.name}?`}
-/>
+                        Submit Reservation
+                      </Button>
+                      <ConfirmationModal
+                        isVisible={isConfirmationVisibleArray[rowIndex][itemIndex]}
+                        onConfirm={() => props.handleReservation(item.roomId, item.price)}
+                        onCancel={() => toggleConfirmationModal(item.roomId, item.price, rowIndex, itemIndex)}
+                        message={`Are you sure you want to submit the reservation for ${item.name}?`}
+                      />
                     </div>
                   ) : (
                     <button className="siCheckButton" onClick={onClickFunction}>See availability</button>

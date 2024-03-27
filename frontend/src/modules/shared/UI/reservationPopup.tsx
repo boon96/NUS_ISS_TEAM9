@@ -32,7 +32,8 @@ const ConfirmationModal = (props) => {
   return (
     <Modal
       title="Confirm Action"
-      visible={isModalVisible}
+      // visible={isModalVisible}
+      open={isModalVisible}
       onOk={handleOk}
       onCancel={handleCancel}
       destroyOnClose  // This prop ensures the modal content is destroyed when closed

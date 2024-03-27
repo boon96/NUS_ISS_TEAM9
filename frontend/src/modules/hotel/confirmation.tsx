@@ -46,7 +46,7 @@ export const HotelConfirmation = () =>{
               name="phone"
               rules={[
                 { required: true, message: 'Please enter your phone number' },
-                { pattern: /^[0-9]{8}$/, message: 'Please enter a valid phone number' },
+                { pattern: /^[0-9]$/, message: 'Please enter a valid phone number' },
               ]}
             >
               <Input />
