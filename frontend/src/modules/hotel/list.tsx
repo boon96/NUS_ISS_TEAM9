@@ -97,7 +97,7 @@ const List = () => {
         }));
     };
 
-    const handleSubmit = (values) => {
+    const handleSearch = (values) => {
         console.log("Form values:", formValues); // Form values will contain the selected date range
         console.log("Selected date range:", dateRange); // You can also directly log the state variable directly
 
@@ -106,8 +106,6 @@ const List = () => {
         //storage session customerid.
 
         // axios to search for hotel again
-
-
 
         // console.log("reservation form: ", reservationForm); // Log the updated reservationForm
 
@@ -191,7 +189,7 @@ const List = () => {
                         <div className="lsItem">
                             <label>Date in Hotel: {daysInHotel}</label>
                             <label>Check-in/Check-out Date</label>
-                            <Form onFinish={handleSubmit}>
+                            <Form onFinish={handleSearch}>
                                 <Form.Item>
                                     <RangePicker
                                         format="DD-MM-YYYY"
@@ -235,13 +233,14 @@ const List = () => {
                     </div>
                     <div className="listResult">
                         <SearchItem price={10} dates={formValues}
-                            handleSubmit={handleSubmit} handleReservation={handleReservation} userLoggedIn={userLoggedIn} daysInHotel={daysInHotel} />
+                            handleReservation={handleReservation} userLoggedIn={userLoggedIn} daysInHotel={daysInHotel} />
                     </div>
                 </div>
             </div>
         </div>
     );
 };
+
 // Function to clear session storage except for the customer
 const clearSessionStorageExceptCustomer = () => {
     const customerData = Storage.session.get('customer');

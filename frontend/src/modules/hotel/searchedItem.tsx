@@ -38,6 +38,10 @@ const SearchItem = (props: any) => {
   //retrieve details of searched item
 
   console.log(mockData)
+  const filteredMockData = mockData.filter(item => {
+    // Filter out items where description is 'test'
+    return item.status !== 'Unavailable';
+  });
 
   const onClickFunction = () => {
     console.log(Storage.session.get('customer'));
@@ -64,8 +68,8 @@ const SearchItem = (props: any) => {
 
   // Function to chunk the mockData into rows of 3 items
   const chunkedData = [];
-  for (let i = 0; i < mockData.length; i += 3) {
-    chunkedData.push(mockData.slice(i, i + 3));
+  for (let i = 0; i < filteredMockData.length; i += 3) {
+    chunkedData.push(filteredMockData.slice(i, i + 3));
   }
 
   return (
