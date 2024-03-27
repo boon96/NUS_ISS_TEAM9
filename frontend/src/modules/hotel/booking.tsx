@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Card, Button, Checkbox, Form, type FormProps, Input, DatePicker, InputNumber } from 'antd';
+import { Card, Button, Checkbox, Form, type FormProps, Input, DatePicker, InputNumber, notification } from 'antd';
 import moment from 'moment';
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AppDispatch } from "src/config/store";
 import { Storage } from 'react-jhipster';
 import { roomSearch } from "./hotel.reducer";
@@ -81,7 +81,7 @@ export const HotelBooking = () => {
     return (
         <section className="m-8">
             <HotelHeader/>
-            
+
             <Card title="Book your stay here" style={{ width: 600, margin: 'auto' }}>
                 <Form
                     name="basic"

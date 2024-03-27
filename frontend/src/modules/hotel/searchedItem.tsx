@@ -1,6 +1,6 @@
 import "./searchItem.css";
 import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AppDispatch } from "src/config/store";
 import axios from "axios";
 import ConfirmationModal from "../shared/UI/reservationPopup";
