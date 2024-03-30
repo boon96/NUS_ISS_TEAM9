@@ -5,6 +5,7 @@ import com.nus.iss.team9backend.dto.BookingDTO;
 import com.nus.iss.team9backend.dto.CustomerDTO;
 import com.nus.iss.team9backend.service.BookingService;
 import com.nus.iss.team9backend.service.CustomerService;
+import com.nus.iss.team9backend.service.RoomService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class BookingResource {
     private BookingService bookingService;
 
     @Autowired
+    private RoomService roomService;
+
+    @Autowired
     private CustomerService customerService;
 
     @PostMapping
@@ -34,6 +38,8 @@ public class BookingResource {
         savedBooking.setName(customerDTO.getName());
         savedBooking.setEmailAddress(customerDTO.getEmailAddress());
         savedBooking.setPhoneNumber(customerDTO.getPhoneNumber());
+
+        roomService.updateRoomStatus(bookingDTO.getRoomId());
         return new ResponseEntity<>(savedBooking, HttpStatus.CREATED);
 
     }

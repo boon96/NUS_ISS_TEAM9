@@ -13,4 +13,6 @@ public interface RoomService {
     RoomDTO update (Long roomId, RoomDTO dto);
 
     void delete(Long roomId);
+
+    void updateRoomStatus(Long roomId);
 }

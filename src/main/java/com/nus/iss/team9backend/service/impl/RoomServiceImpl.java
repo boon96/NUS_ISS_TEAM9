@@ -8,6 +8,7 @@ import com.nus.iss.team9backend.mapper.RoomMapper;
 import com.nus.iss.team9backend.repository.RoomRepository;
 import com.nus.iss.team9backend.service.RoomService;
 import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,5 +66,10 @@ public class RoomServiceImpl implements RoomService {
         Room room = roomRepository.findById(roomId).orElseThrow(()-> new ResourceNotFoundException("Room does not exist with the given id: "+ roomId));
         roomRepository.deleteById(roomId);
 
+    }
+
+    @Transactional
+    public void updateRoomStatus(Long roomId) {
+        roomRepository.updateRoomStatus(roomId);
     }
 }
