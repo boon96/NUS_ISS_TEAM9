@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import AppRoutes from './routes';
+// import AppRoutes from './routes';
 import HotelHome from './modules/home/login';
 import { HotelBooking } from './modules/hotel/booking';
 import Hotel from './modules/hotel/hotel';
@@ -10,6 +10,7 @@ import AboutUsPage from './modules/home/aboutUs';
 import CreateAccount from './modules/home/create';
 import SearchBooking from './modules/hotel/searchBooking';
 import SummaryResult from './modules/hotel/summaryResult';
+import React from 'react';
 
 export const App = () => {
   const baseHref = document.querySelector('base')?.getAttribute('href')?.replace(/\/$/,'');
@@ -19,14 +20,12 @@ export const App = () => {
       <Header/>
       <BrowserRouter basename={baseHref}>
         <Routes>
-        {/* <Route path="/" element={<HotelHome />} /> */}
         <Route path="/" element={<HotelBooking/> }/>
         <Route path="/hotel" element={<Hotel/>}/>
         <Route path="/login" element={<HotelHome />} />
         <Route path="/contactus" element={<ContactUsPage />} />
         <Route path="/aboutus" element={<AboutUsPage />} />
         <Route path="/register" element={<CreateAccount />} />
-        {/* <Route path="/summary" element={<SummaryPage />} /> */}
         <Route path="/search" element={<SearchBooking />} />
         <Route path="/summary" element={<SummaryResult />} />
           {/* <AppRoutes /> Use AppRoutes directly */}

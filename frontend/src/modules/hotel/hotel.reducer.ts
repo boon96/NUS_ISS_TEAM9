@@ -14,13 +14,7 @@ export const roomSearch = createAsyncThunk(
     async (Form: any) => {
         try {
             console.log(Form);
-            // return(await axios.get('api/room',Form,{
-            //     headers:{
-            //         "Content-Type": "application/json",
-            //     },
-            // })
             return (await axios.get('api/room')
-                // return response;
             )
         } catch (error) {
             throw error;
@@ -38,8 +32,6 @@ export const reservationBooking = createAsyncThunk(
                     "Content-Type": "application/json",
                 },
             })
-                // return(await axios.get('api/room')
-                // return response;
             )
         } catch (error) {
             throw error;
