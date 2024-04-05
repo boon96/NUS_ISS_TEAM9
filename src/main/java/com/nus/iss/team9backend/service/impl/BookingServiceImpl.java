@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 public class BookingServiceImpl implements BookingService {
     private final EntityManager entityManager;
     private final BookingRepository bookingRepository;
+
     private final BookingMapper bookingMapper;
     @Autowired
     private ObjectMapper objectMapper;
@@ -33,6 +34,7 @@ public class BookingServiceImpl implements BookingService {
 
         Booking booking =bookingMapper.toEntity(bookingDTO);
         booking = bookingRepository.save(booking);
+
         return bookingMapper.toDto(booking);
     }
 
