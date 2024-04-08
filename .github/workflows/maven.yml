@@ -34,15 +34,15 @@ jobs:
     #   run: |
     #     mvn test
 
-    - name: Change directory to /frontend 
-      run: cd frontend
-      
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
         node-version: 20.x
         cache: 'npm'
-
+        
+    - name: Change directory to /frontend 
+      run: cd frontend
+      
     - name: Install dependencies and run tests for Node.js
       run: |
         npm ci
