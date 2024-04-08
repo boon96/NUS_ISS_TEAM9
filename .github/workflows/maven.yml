@@ -10,9 +10,9 @@ name: Java CI with Maven
 
 on:
   push: 
-    branches: [ "master" ]
+    branches: [ "cicd" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "cicd" ]
 
 jobs:
   build:
@@ -29,6 +29,19 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn clean compile
-    
 
+    - name: Build and Test Java with Maven
+      run: |
+        mvn clean test
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: [18.x, 20.x, 21.x]
+        cache: 'npm'
+
+    - name: Install dependencies and run tests for Node.js
+      run: |
+        npm ci
+        npm test
     
