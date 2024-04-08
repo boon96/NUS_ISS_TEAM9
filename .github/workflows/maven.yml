@@ -39,9 +39,7 @@ jobs:
       with:
         node-version: 20.x
         cache: 'npm'
-
-    - name: Change directory to /frontend 
-      run: cd /home/runner/work/NUS_ISS_TEAM9/NUS_ISS_TEAM9/frontend
+        cache-dependency-path: subdir/package-lock.json
       
     - name: Install dependencies and run tests for Node.js
       run: |
