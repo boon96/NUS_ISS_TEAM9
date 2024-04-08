@@ -30,6 +30,19 @@ public class BookingResource {
     @Autowired
     private CustomerService customerService;
 
+    public void setBookingService(BookingService bookingService) {
+        this.bookingService = bookingService;
+    }
+
+    public void setRoomService(RoomService roomService) {
+        this.roomService = roomService;
+    }
+
+    // @Autowired // This annotation is not needed anymore if you manually inject dependencies
+    public void setCustomerService(CustomerService customerService) {
+        this.customerService = customerService;
+    }
+
     @PostMapping
     public ResponseEntity<BookingDTO> createBooking(@RequestBody BookingDTO bookingDTO){
         BookingDTO savedBooking = bookingService.save(bookingDTO);
