@@ -16,7 +16,6 @@ export const App = () => {
   const baseHref = document.querySelector('base')?.getAttribute('href')?.replace(/\/$/,'');
   return (
     <div className="App">
-      {/* <h1>Hotel Name</h1> */}
       <Header/>
       <BrowserRouter basename={baseHref}>
         <Routes>
