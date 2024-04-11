@@ -62,9 +62,8 @@ jobs:
       run: |
         npm --prefix frontend ci --force
 
-    - name: Build
-      run: |
-        npm --prefix frontend run build --force
+    - name: Start the development server
+      run: npm --prefix frontend start
 
     - name: Lint
       run: |
