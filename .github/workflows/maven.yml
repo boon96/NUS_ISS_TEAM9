@@ -54,8 +54,8 @@ jobs:
           ${{ runner.os }}-build-
           ${{ runner.os }}-
 
-    - name: Check if package-lock.json exists
-      run: test -f package-lock.json || npm install
+    - name: Install node modules
+      run: npm install
 
     - name: Install Dependencies
       if: steps.cache-nodemodules.outputs.cache-hit != 'true'
