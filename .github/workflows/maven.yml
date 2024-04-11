@@ -54,21 +54,25 @@ jobs:
           ${{ runner.os }}-build-
           ${{ runner.os }}-
 
+    - name: Install node modules
+      run: npm --prefix frontend install
+
     - name: Install Dependencies
       if: steps.cache-nodemodules.outputs.cache-hit != 'true'
-      run: npm --prefix frontend ci --force
+      run: |
+        npm --prefix frontend ci --force
 
     - name: Build
       run: |
-        npm run build --force
+        npm --prefix frontend run build --force
 
     - name: Lint
       run: |
-        npm run lint
+        npm --prefix frontend run lint
 
     - name: Update types to latest
       run: |
-        npm install --save-dev @types/node@latest --force
+        npm --prefix frontend install --save-dev @types/node@latest --force
       #- name: Test
       #  run: |
       #    npm run test --watch=false --browsers=ChromeHeadless
@@ -91,7 +95,7 @@ jobs:
         body: ${{ steps.changelog.outputs.clean_changelog }}
     - name: Deploy
       run: |
-        npm run deploy
+        npm --prefix frontend run deploy
 
 #    - name: Build and Test Java with Maven
 #      run: |
