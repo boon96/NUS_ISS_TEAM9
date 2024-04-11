@@ -82,7 +82,8 @@ jobs:
       with:
         github-token: ${{ secrets.TEAM9_NUS_TOKEN }}
         output-file: "false"
-        config-file: "frontend/package.json"
+        version-file: "frontend/package.json"
+
 
     - name: Create Release
       uses: actions/create-release@v1
