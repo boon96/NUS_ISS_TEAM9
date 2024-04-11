@@ -80,7 +80,7 @@ jobs:
       id: changelog
       uses: TriPSs/conventional-changelog-action@v3
       with:
-        github-token: ${{secrets.TEAM9_NUS_TOKEN}}
+        github-token: ${{secrets.TEAM9}}
         output-file: "false"
         version-file: "frontend/package.json"
 
@@ -89,7 +89,7 @@ jobs:
       uses: actions/create-release@v1
       if: ${{ steps.changelog.outputs.skipped == 'false' }}
       env:
-        GITHUB_TOKEN: ${{secrets.TEAM9_NUS_TOKEN}}
+        GITHUB_TOKEN: ${{secrets.TEAM9}}
       with:
         tag_name: ${{ steps.changelog.outputs.tag }}
         release_name: ${{ steps.changelog.outputs.tag }}
