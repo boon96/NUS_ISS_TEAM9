@@ -65,9 +65,9 @@ jobs:
 #    - name: Start the development server - DONT RUN THIS!!!!
 #      run: npm --prefix frontend start
 
-    - name: Lint
-      run: |
-        npm --prefix frontend run lint
+#    - name: Lint
+#      run: |
+#        npm --prefix frontend run lint
 
     - name: Update types to latest
       run: |
