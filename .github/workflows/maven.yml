@@ -93,9 +93,9 @@ jobs:
         tag_name: ${{ steps.changelog.outputs.tag }}
         release_name: ${{ steps.changelog.outputs.tag }}
         body: ${{ steps.changelog.outputs.clean_changelog }}
-    - name: Deploy
-      run: |
-        npm --prefix frontend run deploy
+#    - name: Deploy
+#      run: |
+#        npm --prefix frontend run deploy
 
 #    - name: Build and Test Java with Maven
 #      run: |
