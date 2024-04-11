@@ -84,7 +84,6 @@ jobs:
         output-file: "false"
         version-file: "frontend/package.json"
 
-
     - name: Create Release
       uses: actions/create-release@v1
       if: ${{ steps.changelog.outputs.skipped == 'false' }}
