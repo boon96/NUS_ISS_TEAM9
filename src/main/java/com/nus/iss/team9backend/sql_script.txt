@@ -1,12 +1,13 @@
-INSERT INTO TBL_ROOMTYPE (name, description, price)
-VALUES 
+use team9;
+INSERT INTO team9.tbl_roomtype (name, description, price)
+VALUES
     ('ABC Premier Room', 'Luxurious bathroom with deep soaking tub', 1180),
     ('ABC Premier Room With Beach View', 'Walk-out balcony and Luxurious bathroom with deep soaking tub', 1230),
     ('ABC Premier Room With City View', 'Expansive marble bathroom', 1330),
     ('ABC Family Suite', 'Bespoke Armoire & cocktail bar, 1 king bed and bunk bed and Kids-friendly amenities', 2000);
 
 -- Insert rooms for Level 1 (ABC Premier Room)
-INSERT INTO TBL_ROOM (location, status, room_type_id)
+INSERT INTO team9.tbl_room (location, status, room_type_id)
 VALUES
     ('Level 1 - Room 1', 'Available', 1),
     ('Level 1 - Room 2', 'Available', 1),
@@ -15,7 +16,7 @@ VALUES
     ('Level 1 - Room 5', 'Available', 1);
 
 -- Insert rooms for Level 2 (ABC Premier Room With Beach View)
-INSERT INTO TBL_ROOM (location, status, room_type_id)
+INSERT INTO team9.tbl_room (location, status, room_type_id)
 VALUES
     ('Level 2 - Room 6', 'Available', 2),
     ('Level 2 - Room 7', 'Available', 2),
@@ -24,7 +25,7 @@ VALUES
     ('Level 2 - Room 10', 'Available', 2);
 
 -- Insert rooms for Level 3 (ABC Premier Room With City View)
-INSERT INTO TBL_ROOM (location, status, room_type_id)
+INSERT INTO team9.tbl_room (location, status, room_type_id)
 VALUES
     ('Level 3 - Room 11', 'Available', 3),
     ('Level 3 - Room 12', 'Available', 3),
@@ -33,7 +34,7 @@ VALUES
     ('Level 3 - Room 15', 'Available', 3);
 
 -- Insert rooms for Level 4 (ABC Family Suite)
-INSERT INTO TBL_ROOM (location, status, room_type_id)
+INSERT INTO team9.tbl_room (location, status, room_type_id)
 VALUES
     ('Level 4 - Room 16', 'Available', 4),
     ('Level 4 - Room 17', 'Available', 4),
