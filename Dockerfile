@@ -14,7 +14,5 @@ ENV SPRING_DATASOURCE_PASSWORD=password
 ENV SPRING_JPA_SHOW_SQL=true
 ENV SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
-
-
 # Run the Spring Boot application when the container launches
 ENTRYPOINT ["java", "-jar", "/nus-team-9.jar"]
