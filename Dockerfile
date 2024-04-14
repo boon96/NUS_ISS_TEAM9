@@ -2,7 +2,7 @@
 
 FROM openjdk:17-jdk-alpine
 WORKDIR /app
-COPY target\nus-team-9.jar nus-team-9.jar
+COPY ./target/nus-team-9.jar /app
 
 # Expose port 8080
 EXPOSE 8080
