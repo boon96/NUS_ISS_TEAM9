@@ -46,12 +46,15 @@ jobs:
 
       - name: Build and push backend
         run: |
+          cd ..
+          echo "Current working directory is $(pwd)"
           docker build -t boonchun/nus_team_9:backend-latest . --build-arg JAR_FILE=target/nus-team-9.jar
           docker push boonchun/nus_team_9:backend-latest
 
       - name: Build and push frontend
         run: |
             cd frontend
+            echo "Current working directory is $(pwd)"
             docker build -t boonchun/nus_team_9:frontend-latest . 
             docker push boonchun/nus_team_9:frontend-latest  
 
