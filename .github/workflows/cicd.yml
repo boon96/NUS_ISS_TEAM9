@@ -36,7 +36,6 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Login DockerHub
-        if: github.event_name == 'workflow_run' && github.event.workflow == 'Java CI with Maven' && github.event.conclusion == 'success'
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_TOKEN }}
