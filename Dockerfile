@@ -6,7 +6,7 @@ EXPOSE 8080
 
 # Copy the JAR file from the host into the container
 # Assumes that the JAR file is located in the target directory
-ADD NUS_ISS_TEAM9/target/nus-team-9.jar nus-team-9.jar
+COPY ./target/nus-team-9.jar nus-team-9.jar
 
 # Set environment variables
 ENV SPRING_DATASOURCE_URL=jdbc:mysql://team9.ct6mko20gddw.ap-southeast-1.rds.amazonaws.com:3306/team9
