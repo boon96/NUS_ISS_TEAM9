@@ -17,4 +17,4 @@ ENV SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
 
 # Run the Spring Boot application when the container launches
-CMD ["java", "-jar", "/nus-team-9.jar"]
+ENTRYPOINT ["java", "-jar", "/nus-team-9.jar"]
