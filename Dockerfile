@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-alpine
 EXPOSE 8080
 
 # Copy the packaged Spring Boot application JAR file into the container at /app
-COPY target/*.jar nus-team-9.jar
+COPY target/nus-team-9.jar /app/
 
 # Set environment variables
 ENV SPRING_DATASOURCE_URL=jdbc:mysql://team9.ct6mko20gddw.ap-southeast-1.rds.amazonaws.com:3306/team9
