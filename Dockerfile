@@ -8,7 +8,7 @@ EXPOSE 8080
 WORKDIR /app
 
 # Copy the JAR file from the host into the container
-# Make sure the 'target' directory and the JAR file are present in the build context
+# Assumes that the JAR file is located in the target directory
 COPY target/team9-backend-0.0.1-SNAPSHOT.jar team9-backend-0.0.1-SNAPSHOT.jar
 
 # Set environment variables
