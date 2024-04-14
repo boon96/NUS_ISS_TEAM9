@@ -39,20 +39,20 @@ jobs:
         if: github.event_name == 'workflow_run' && github.event.workflow == 'Java CI with Maven' && github.event.conclusion == 'success'
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_TOKEN }}
         run: |
           cd frontend
           docker build -t boonchun/nus_team_9-frontend:latest .
-          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          docker login -u $DOCKER_USERNAME -p DOCKER_TOKEN
           docker push boonchun/nus_team_9-frontend:latest
 
       - name: Build and push backend Docker image
         if: github.event_name == 'workflow_run' && github.event.workflow == 'Java CI with Maven' && github.event.conclusion == 'success'
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_TOKEN }}
         run: |
           docker build -t boonchun/nus_team_9-backend:latest .
-          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          docker login -u $DOCKER_USERNAME -p DOCKER_TOKEN
           docker push boonchun/nus_team_9-backend:latest
 
