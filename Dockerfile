@@ -6,7 +6,6 @@ EXPOSE 8080
 
 # Set a build argument for the JAR file path
 ARG JAR_FILE
-# Copy the packaged Spring Boot application JAR file into the container at /app
 COPY ${JAR_FILE} /app/nus-team-9.jar
 
 # Set environment variables
