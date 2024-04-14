@@ -35,25 +35,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Build and push frontend Docker image
+      - name: Login Dokcerhub
         if: github.event_name == 'workflow_run' && github.event.workflow == 'Java CI with Maven' && github.event.conclusion == 'success'
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_TOKEN }}
+        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
-        run: |
-          cd frontend
-          docker build -t boonchun/nus_team_9:frontend-latest . 
-          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-          docker push boonchun/nus_team_9:frontend-latest  
-
-      - name: Build and push backend Docker image
-        if: github.event_name == 'workflow_run' && github.event.workflow == 'Java CI with Maven' && github.event.conclusion == 'success'
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_TOKEN }}
+      - name: Build and push backend
         run: |
           docker build -t boonchun/nus_team_9:backend-latest . 
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
           docker push boonchun/nus_team_9:backend-latest 
+
+      - name: Build and push frontend
+        run: |
+            cd frontend
+            docker build -t boonchun/nus_team_9:frontend-latest . 
+            docker push boonchun/nus_team_9:frontend-latest  
+
+
 
