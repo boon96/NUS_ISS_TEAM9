@@ -41,9 +41,11 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_TOKEN }}
         run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
+      - name: Print current working directory
+        run: echo "Current working directory is $(pwd)"
+
       - name: Build and push backend
         run: |
-          cd NUS_ISS_TEAM9
           docker build -t boonchun/nus_team_9:backend-latest . --build-arg JAR_FILE=target/nus-team-9.jar
           docker push boonchun/nus_team_9:backend-latest
 
