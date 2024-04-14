@@ -69,6 +69,3 @@ jobs:
         run: docker run -d -p 8080:8080 boonchun/nus_team_9:backend-latest
       - name: Run frontend container
         run: docker run -d -p 3000:3000 boonchun/nus_team_9:frontend-latest
-
-
-
