@@ -20,4 +20,4 @@ ENV SPRING_JPA_SHOW_SQL=true
 ENV SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
 # Command to run the application
-CMD ["java", "-jar", "/app/team9-backend-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "team9-backend-0.0.1-SNAPSHOT.jar"]
