@@ -57,7 +57,7 @@ jobs:
             docker push boonchun/nus_team_9:frontend-latest  
 
   deploy:
-    needs: build
+    needs: build_and_push_docker_images
     runs-on: [aws-ec2]
     steps:
       - name: Pull image from Docker Hub for backend
