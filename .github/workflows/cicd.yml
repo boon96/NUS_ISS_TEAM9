@@ -30,7 +30,6 @@ jobs:
     runs-on: ubuntu-latest
 
     needs: build_with_maven
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
