@@ -64,7 +64,7 @@
 			</plugin>
 		</plugins>
 		<defaultGoal>install</defaultGoal>
-
+		<finalName>nus-team-9</finalName>
 	</build>
 
 </project>
