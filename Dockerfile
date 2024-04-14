@@ -1,4 +1,6 @@
 # Use the official OpenJDK 17 image as the base image
+
+RUN mvn clean package -DskipTests
 FROM openjdk:17
 VOLUME /tmp
 
