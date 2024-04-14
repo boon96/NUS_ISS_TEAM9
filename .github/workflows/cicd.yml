@@ -55,3 +55,4 @@ jobs:
           docker build -t boonchun/nus_team_9-backend:latest .
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
           docker push boonchun/nus_team_9-backend:latest
+
