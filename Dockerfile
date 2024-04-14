@@ -9,5 +9,5 @@ ENV SPRING_DATASOURCE_PASSWORD=password
 ENV SPRING_JPA_SHOW_SQL=true
 ENV SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
-ENTRYPOINT ["java","-jar","/team9-backend-0.0.1-SNAPSHOT.jar"]
+CMD ["java","-jar","/team9-backend-0.0.1-SNAPSHOT.jar"]
 
