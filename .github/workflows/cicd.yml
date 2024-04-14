@@ -27,6 +27,7 @@ jobs:
           docker build -t boonchun/nus_team_9-frontend:latest . 
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
           docker push boonchun/nus_team_9-frontend:latest  
+          
 
       - name: Build and push backend Docker image
         if: github.event_name == 'workflow_run' && github.event.workflow == 'Java CI with Maven' && github.event.conclusion == 'success'
