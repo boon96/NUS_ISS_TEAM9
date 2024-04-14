@@ -41,10 +41,10 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_TOKEN }}
         run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
-      - name: Build and push backend
-        run: |
-          docker build --no-cache -t boonchun/nus_team_9:backend-latest .
-          docker push boonchun/nus_team_9:backend-latest 
+#      - name: Build and push backend
+#        run: |
+#          docker build --no-cache -t boonchun/nus_team_9:backend-latest .
+#          docker push boonchun/nus_team_9:backend-latest
 
       - name: Build and push frontend
         run: |
