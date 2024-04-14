@@ -16,4 +16,4 @@ ENV SPRING_JPA_SHOW_SQL=true
 ENV SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
 # Command to run the application
-ENTRYPOINT ["java", "-jar", "/nus-team-9.jar"]
+ENTRYPOINT ["java", "-jar", "nus-team-9.jar"]
