@@ -46,7 +46,7 @@ jobs:
 
       - name: Build and push backend
         run: |
-          docker build -t boonchun/nus_team_9:backend-latest . --build-arg JAR_FILE=target/nus-team-9.jar
+          docker build -t boonchun/nus_team_9:backend-latest . --build-arg JAR_FILE=NUS_ISS_TEAM9/target/nus-team-9.jar
           docker push boonchun/nus_team_9:backend-latest
 
       - name: Build and push frontend
