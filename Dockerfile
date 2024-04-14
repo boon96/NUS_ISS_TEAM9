@@ -1,12 +1,11 @@
 # Use the official OpenJDK 17 image as the base image
 
 FROM openjdk:17-jdk-alpine
-ARG JAR_FILE =target/*.jar
-COPY ./target/nus-team-9.jar nus-team-9.jar
 
 # Expose port 8080
 EXPOSE 8080
 
+ADD target/nus-team-9.jar nus-team-9.jar
 # Set environment variables
 ENV SPRING_DATASOURCE_URL=jdbc:mysql://team9.ct6mko20gddw.ap-southeast-1.rds.amazonaws.com:3306/team9
 ENV SPRING_DATASOURCE_USERNAME=root
