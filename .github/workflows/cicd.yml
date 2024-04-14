@@ -43,7 +43,8 @@ jobs:
 
       - name: Build and push backend
         run: |
-          docker build -t boonchun/nus_team_9:backend-latest -f Dockerfile .
+          cd target
+          docker build -t boonchun/nus_team_9:backend-latest .
           docker push boonchun/nus_team_9:backend-latest
 
       - name: Build and push frontend
