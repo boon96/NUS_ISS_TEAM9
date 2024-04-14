@@ -1,5 +1,5 @@
 # Use an official OpenJDK runtime as a parent image
-FROM openjdk:17-jdk-alpine
+FROM eclipse-temurin:17-jdk-alpine
 
 # Set the working directory to /app
 WORKDIR /app
@@ -17,4 +17,4 @@ ENV SPRING_JPA_HIBERNATE_DDL_AUTO=update
 COPY target/nus-team-9.jar /app/
 
 # Command to run the application
-ENTRYPOINT ["java", "-jar", "nus-team-9.jar"]
+CMD ["java", "-jar", "nus-team-9.jar"]
