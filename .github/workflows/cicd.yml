@@ -44,12 +44,6 @@ jobs:
       - name: Print current working directory
         run: echo "Current working directory is $(pwd)"
 
-      - name: Change directory to project root
-        run: cd NUS_ISS_TEAM9
-
-      - name: Print current working directory after change
-        run: echo "Current working directory is now $(pwd)"
-
       - name: Build and push backend
         run: |
           docker build -t boonchun/nus_team_9:backend-latest . --build-arg JAR_FILE=target/nus-team-9.jar
