@@ -30,8 +30,8 @@ jobs:
     needs: build_with_maven
     steps:
       - name: Build with Maven
-        run: mvn test
-
+        run: |
+          mvn test
 
   build_and_push_docker_images:
     name: Build and push Docker images
