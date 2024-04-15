@@ -54,6 +54,7 @@ jobs:
             docker build -t boonchun/nus_team_9:frontend-latest . 
             docker push boonchun/nus_team_9:frontend-latest  
 
+
   deploy:
     name: Pull from Docker and Deploy
     needs: build_and_push_docker_images
