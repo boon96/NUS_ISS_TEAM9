@@ -84,5 +84,9 @@ jobs:
         run: docker run -d --name backend -p 8080:8080 boonchun/nus_team_9:backend-latest
       - name: Run frontend container
         run: docker run -d --name frontend -p 3000:80 boonchun/nus_team_9:frontend-latest
-
+      - name: Setup docker network
+        run: |
+          docker network create my-network
+          docker network connect my-network frontend
+          docker network connect my-network backend
 
