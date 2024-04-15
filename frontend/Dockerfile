@@ -26,8 +26,8 @@ COPY nginx.conf /etc/nginx/conf.d
 # Copy the build output from the build stage to serve the application
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Expose port 3000
-EXPOSE 3000
+# Expose port 80
+EXPOSE 80
 
 # Command to start Nginx and serve the application
 CMD ["nginx", "-g", "daemon off;"]
