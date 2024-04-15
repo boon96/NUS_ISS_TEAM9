@@ -24,11 +24,19 @@ jobs:
       - name: Build with Maven
         run: mvn clean package
 
+  build_maven_test:
+    name: Build with Maven Test
+    runs-on: ubuntu-latest
+    needs: build_with_maven
+    steps:
+      - name: Build with Maven
+        run: mvn test
+
+
   build_and_push_docker_images:
     name: Build and push Docker images
     runs-on: ubuntu-latest
-
-    needs: build_with_maven
+    needs: build_maven_test
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -44,7 +52,7 @@ jobs:
 
       - name: Build and push backend
         run: |
-            docker build -t boonchun/nus_team_9:backend-latest . --build-arg JAR_FILE=target/nus-team-9.jar --no-cache          
+            docker build -t boonchun/nus_team_9:backend-latest . 
             docker push boonchun/nus_team_9:backend-latest
 
       - name: Build and push frontend
@@ -54,22 +62,24 @@ jobs:
             docker build -t boonchun/nus_team_9:frontend-latest . 
             docker push boonchun/nus_team_9:frontend-latest  
 
-
   deploy:
     name: Pull from Docker and Deploy
     needs: build_and_push_docker_images
     runs-on: [aws-ec2]
     steps:
-      - name: Stop and remove old backend container
-        run: |
-          docker stop backend || true
-          docker rm -f backend || true
-      - name: Stop and remove old frontend container
-        run: |
-          docker stop frontend || true
-          docker rm -f frontend || true
       - name: Prune unused Docker images
         run: docker image prune -f
+
+      - name: Stop and remove old backend container
+        run: |
+          docker stop backend 
+          docker rm -f backend 
+
+      - name: Stop and remove old frontend container
+        run: |
+          docker stop frontend 
+          docker rm -f frontend 
+
       - name: Pull image from Docker Hub for backend
         run: docker pull boonchun/nus_team_9:backend-latest
       - name: Pull image from Docker Hub for frontend

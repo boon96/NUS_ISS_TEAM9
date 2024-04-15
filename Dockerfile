@@ -18,12 +18,6 @@ RUN mvn package -DskipTests
  
 # For the final image, use the Java runtime image
 FROM openjdk:17-alpine
- 
-# Copy the jar file from the build stage to the final image
-COPY --from=build /app/target/*.jar app.jar
- 
-# Expose the port the app runs on
-EXPOSE 8080
 
 # Set environment variables
 ENV SPRING_DATASOURCE_URL=jdbc:mysql://team9.ct6mko20gddw.ap-southeast-1.rds.amazonaws.com:3306/team9
@@ -31,6 +25,14 @@ ENV SPRING_DATASOURCE_USERNAME=root
 ENV SPRING_DATASOURCE_PASSWORD=password
 ENV SPRING_JPA_SHOW_SQL=true
 ENV SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+# Copy the jar file from the build stage to the final image
+COPY --from=build /app/target/*.jar app.jar
+ 
+# Expose the port the app runs on
+EXPOSE 8080
+
+
  
 # Run the jar file 
 ENTRYPOINT ["java","-jar","/app.jar"]
