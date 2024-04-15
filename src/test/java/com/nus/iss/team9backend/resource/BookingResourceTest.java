@@ -1,7 +1,5 @@
 package com.nus.iss.team9backend.resource;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.Test;
@@ -63,6 +61,46 @@ public class BookingResourceTest {
     }
 
     @Test
+    void testCreateBookingFailure() {
+        BookingService bookingService = mock(BookingService.class);
+        CustomerService customerService = mock(CustomerService.class);
+        RoomService roomService = mock(RoomService.class);
+
+        // Create instance of the class to be tested
+        BookingResource bookingResource = new BookingResource();
+        bookingResource.setBookingService(bookingService);
+        bookingResource.setCustomerService(customerService);
+        bookingResource.setRoomService(roomService);
+
+        // Create test data
+        BookingDTO bookingDTO = new BookingDTO();
+        bookingDTO.setCustomerId(1L);
+        bookingDTO.setCheckInDate(null);
+        bookingDTO.setCheckOutDate(null);
+        // Set other properties as needed
+
+        CustomerDTO customerDTO = new CustomerDTO();
+        customerDTO.setCustomerId(1L);
+        customerDTO.setName("John Doe");
+        customerDTO.setEmailAddress("john@example.com");
+        customerDTO.setPhoneNumber(Long.parseLong("123456789"));
+        bookingDTO.setCustomerId(customerDTO.getCustomerId());
+        bookingDTO.setName(customerDTO.getName());
+        bookingDTO.setPhoneNumber(customerDTO.getPhoneNumber());
+
+        // Mock behavior of dependencies
+        // Mocking behavior to simulate failure
+        when(bookingService.save(bookingDTO)).thenThrow(new RuntimeException("Failed to save booking"));
+        when(customerService.get(bookingDTO.getCustomerId())).thenReturn(customerDTO);
+
+        // Call the method to be tested
+        // Since the method is expected to throw an exception, it needs to be wrapped in an assertThrows block
+        assertThrows(RuntimeException.class, () -> {
+            bookingResource.createBooking(bookingDTO);
+        });
+    }
+
+    @Test
     void testDeleteCustomer() {
         BookingService bookingService = mock(BookingService.class);
         CustomerService customerService = mock(CustomerService.class);
@@ -76,7 +114,6 @@ public class BookingResourceTest {
 
         // Verify that the BookingService's delete method was called with the correct bookingId
 
-
         ResponseEntity<String> response = bookingResource.deleteCustomer(bookingDTO.getBookId());
         verify(bookingService).delete(bookingDTO.getBookId());
 
@@ -87,52 +124,42 @@ public class BookingResourceTest {
     }
 
     @Test
+    void testDeleteCustomerFailure() {
+        BookingService bookingService = mock(BookingService.class);
+        CustomerService customerService = mock(CustomerService.class);
+
+        // Create instance of the class to be tested
+        BookingResource bookingResource = new BookingResource();
+        bookingResource.setBookingService(bookingService);
+
+        BookingDTO bookingDTO = new BookingDTO();
+        bookingDTO.setBookId(1L);
+
+        // Mock behavior of dependencies to simulate failure (e.g., throwing an exception)
+        doThrow(new RuntimeException("Failed to delete booking")).when(bookingService).delete(bookingDTO.getBookId());
+
+        // Call the method to be tested
+        ResponseEntity<String> response = bookingResource.deleteCustomer(bookingDTO.getBookId());
+
+        // Verify that the BookingService's delete method was called with the correct bookingId
+        verify(bookingService).delete(bookingDTO.getBookId());
+
+        // Assert the result
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode()); // Assuming failure status code
+        assertNotNull(response.getBody()); // Assuming there's a message in the response body indicating failure
+        assertEquals("Failed to delete booking", response.getBody()); // Assert the error message
+    }
+
+
+
+    @Test
     void testGetAllBooking() {
 
     }
 
     @Test
     void testGetBooking() {
-//        // Create mock objects for services
-//        BookingService bookingService = mock(BookingService.class);
-//        CustomerService customerService = mock(CustomerService.class);
-//
-//        // Create instance of the class to be tested
-//        BookingResource bookingResource = new BookingResource();
-//        bookingResource.setBookingService(bookingService);
-//        bookingResource.setCustomerService(customerService);
-//
-//        // Create a sample BookingDTO with a bookingId
-//        long bookingId = 1L;
-//        BookingDTO bookingDTO = new BookingDTO();
-//        bookingDTO.setBookId(bookingId);
-//        // Set other properties as needed
-//
-//        // Mock behavior of bookingService.get method to return the sample BookingDTO when called with the bookingId
-//        when(bookingService.get(bookingId)).thenReturn(bookingDTO);
-//
-//
-//        // Create a sample CustomerDTO with a customerId
-//        long customerId = 1L;
-//        CustomerDTO customerDTO = new CustomerDTO();
-//        customerDTO.setCustomerId(customerId);
-//        customerDTO.setName("John Doe");
-//        customerDTO.setEmailAddress("john@example.com");
-//        customerDTO.setPhoneNumber(Long.parseLong("123456789"));
-//
-//        // Mock behavior of customerService.get method to return the sample CustomerDTO when called with the customerId
-//        when(customerService.get(customerId)).thenReturn(customerDTO);
-//
-//        // Call the method to be tested with the bookingId
-//        ResponseEntity<BookingDTO> response = bookingResource.getBooking(bookingId);
-//
-//        // Assert the result
-//        assertEquals(HttpStatus.OK, response.getStatusCode());
-//        assertNotNull(response.getBody());
-//        assertEquals(bookingId, response.getBody().getBookId());
-//        assertEquals(customerDTO.getName(), response.getBody().getName());
-//        assertEquals(customerDTO.getEmailAddress(), response.getBody().getEmailAddress());
-//        assertEquals(customerDTO.getPhoneNumber(), response.getBody().getPhoneNumber());
+
     }
 
     @Test
