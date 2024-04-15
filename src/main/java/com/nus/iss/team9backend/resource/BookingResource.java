@@ -80,7 +80,14 @@ public class BookingResource {
     }
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteCustomer(@PathVariable("id") Long bookingId){
-        bookingService.delete(bookingId);
-        return ResponseEntity.ok("Booking deleted successfully");
+        try{
+            bookingService.delete(bookingId);
+            return ResponseEntity.ok("Booking deleted successfully");
+        }catch (RuntimeException e) {
+            // Log the exception
+//            logger.error("Failed to delete booking with ID: {}", bookingId, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete booking");
+        }
+
     }
 }
