@@ -76,6 +76,7 @@ jobs:
           docker stop frontend || true
           docker rm -f frontend || true
 
+
       - name: Pull image from Docker Hub for backend
         run: docker pull boonchun/nus_team_9:backend-latest
       - name: Pull image from Docker Hub for frontend
