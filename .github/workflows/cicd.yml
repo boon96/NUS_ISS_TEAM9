@@ -68,13 +68,13 @@ jobs:
 
       - name: Stop and remove old backend container
         run: |
-          docker stop backend 
-          docker rm -f backend 
+          docker stop backend || true
+          docker rm -f backend || true
 
       - name: Stop and remove old frontend container
         run: |
-          docker stop frontend 
-          docker rm -f frontend 
+          docker stop frontend || true
+          docker rm -f frontend || true
 
       - name: Pull image from Docker Hub for backend
         run: docker pull boonchun/nus_team_9:backend-latest
