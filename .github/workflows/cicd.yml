@@ -67,6 +67,8 @@ jobs:
         run: |
           docker stop frontend || true
           docker rm -f frontend || true
+      - name: Prune unused Docker images
+        run: docker image prune -f
       - name: Pull image from Docker Hub for backend
         run: docker pull boonchun/nus_team_9:backend-latest
       - name: Pull image from Docker Hub for frontend
