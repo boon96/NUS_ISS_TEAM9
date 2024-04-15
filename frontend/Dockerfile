@@ -1,9 +1,9 @@
 # Stage 1: Build the React app
-FROM node:14 as build
+FROM node:14 as builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
-COPY ..
+COPY . .
 RUN npm run build
 
 # Stage 2: Serve the React application using Nginx
