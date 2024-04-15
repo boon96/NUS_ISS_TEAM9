@@ -1,14 +1,14 @@
 # Stage 1: Build the React app
-FROM node:14 as build
+FROM node:16-alpine as build
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
-# Install dependencies including 'react-hook-form'
+# Install dependencies
 RUN npm install
 
-# Copy the rest of the application files
+# Copy the rest of the application code
 COPY . .
 
 # Run the build script
@@ -17,11 +17,11 @@ RUN npm run build
 # Stage 2: Serve the React application using Nginx
 FROM nginx:alpine
 
-# Copy the built React app from the previous stage into the nginx server
+# Copy the build output from the build stage to serve the application
 COPY --from=build /app/build /usr/share/nginx/html
 
 # Expose port 80
 EXPOSE 80
 
-# Start nginx server
+# Command to start Nginx and serve the application
 CMD ["nginx", "-g", "daemon off;"]
