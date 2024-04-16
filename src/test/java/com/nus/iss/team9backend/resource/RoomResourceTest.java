@@ -34,9 +34,10 @@ class RoomResourceTest {
     public void setup() {
         openMocks(this);
     }
+    
     @Test
     void getAllRoom_Success() {
-// Mock data
+
         List<RoomDTO> mockRoomList = new ArrayList<>();
         RoomDTO mockRoom1 = new RoomDTO();
         mockRoom1.setRoomId(1L);
