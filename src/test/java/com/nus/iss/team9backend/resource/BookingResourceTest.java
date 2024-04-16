@@ -150,20 +150,9 @@ public class BookingResourceTest {
         assertEquals("Failed to delete booking", response.getBody()); // Assert the error message
     }
 
-
-
-    @Test
-    void testGetAllBooking() {
-
-    }
-
     @Test
     void testGetBooking() {
 
     }
 
-    @Test
-    void testUpdateBooking() {
-
-    }
 }
