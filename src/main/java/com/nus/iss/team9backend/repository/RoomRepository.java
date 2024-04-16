@@ -11,6 +11,6 @@ import java.util.List;
 public interface RoomRepository  extends JpaRepository<Room, Long> {
 
     @Modifying
-    @Query(value="UPDATE TBL_Room r SET r.status = 'Unavailable' WHERE r.room_id = :roomId",nativeQuery = true)
+    @Query(value="UPDATE tbl_room r SET r.status = 'Unavailable' WHERE r.room_id = :roomId",nativeQuery = true)
     void updateRoomStatus(@Param("roomId") Long roomId);
 }
