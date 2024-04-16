@@ -1,8 +1,12 @@
 package com.nus.iss.team9backend.resource;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import static org.mockito.MockitoAnnotations.openMocks;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -17,26 +21,33 @@ import com.nus.iss.team9backend.resource.BookingResource;
 
 
 public class BookingResourceTest {
+
+    @Mock
+    private CustomerService customerService;
+
+    @Mock
+    private BookingService bookingService;
+
+    @Mock
+    private RoomService roomService;
+
+    @InjectMocks
+    private BookingResource bookingResource;
+
+    @BeforeEach
+    public void setup() {
+        openMocks(this);
+    }
+
     private final Logger log = LoggerFactory.getLogger(BookingResourceTest.class);
 
     @Test
     void testCreateBooking() {
-        BookingService bookingService = mock(BookingService.class);
-        CustomerService customerService = mock(CustomerService.class);
-        RoomService roomService = mock(RoomService.class);
-
-        // Create instance of the class to be tested
-        BookingResource bookingResource = new BookingResource();
-        bookingResource.setBookingService(bookingService);
-        bookingResource.setCustomerService(customerService);
-        bookingResource.setRoomService(roomService);
-
         // Create test data
         BookingDTO bookingDTO = new BookingDTO();
         bookingDTO.setCustomerId(1L);
         bookingDTO.setCheckInDate(null);
         bookingDTO.setCheckOutDate(null);
-        // Set other properties as needed
 
         CustomerDTO customerDTO = new CustomerDTO();
         customerDTO.setCustomerId(1L);
@@ -62,16 +73,6 @@ public class BookingResourceTest {
 
     @Test
     void testCreateBookingFailure() {
-        BookingService bookingService = mock(BookingService.class);
-        CustomerService customerService = mock(CustomerService.class);
-        RoomService roomService = mock(RoomService.class);
-
-        // Create instance of the class to be tested
-        BookingResource bookingResource = new BookingResource();
-        bookingResource.setBookingService(bookingService);
-        bookingResource.setCustomerService(customerService);
-        bookingResource.setRoomService(roomService);
-
         // Create test data
         BookingDTO bookingDTO = new BookingDTO();
         bookingDTO.setCustomerId(1L);
@@ -102,12 +103,6 @@ public class BookingResourceTest {
 
     @Test
     void testDeleteCustomer() {
-        BookingService bookingService = mock(BookingService.class);
-        CustomerService customerService = mock(CustomerService.class);
-
-        // Create instance of the class to be tested
-        BookingResource bookingResource = new BookingResource();
-        bookingResource.setBookingService(bookingService);
 
         BookingDTO bookingDTO = new BookingDTO();
         bookingDTO.setBookId(1L);
@@ -125,13 +120,6 @@ public class BookingResourceTest {
 
     @Test
     void testDeleteCustomerFailure() {
-        BookingService bookingService = mock(BookingService.class);
-        CustomerService customerService = mock(CustomerService.class);
-
-        // Create instance of the class to be tested
-        BookingResource bookingResource = new BookingResource();
-        bookingResource.setBookingService(bookingService);
-
         BookingDTO bookingDTO = new BookingDTO();
         bookingDTO.setBookId(1L);
 
@@ -151,8 +139,42 @@ public class BookingResourceTest {
     }
 
     @Test
-    void testGetBooking() {
+    void testGetBooking_Success() {
+        Long bookingId = 1L;
+        BookingDTO bookingDTO = new BookingDTO();
+        bookingDTO.setCustomerId(2L); // Assuming customer ID associated with the booking
+        CustomerDTO customerDTO = new CustomerDTO();
+        when(bookingService.get(bookingId)).thenReturn(bookingDTO);
+        when(customerService.get(bookingDTO.getCustomerId())).thenReturn(customerDTO);
 
+        // Call the method being tested
+        ResponseEntity<BookingDTO> responseEntity = bookingResource.getBooking(bookingId);
+
+        // Verify the behavior
+        verify(bookingService, times(1)).get(bookingId);
+        verify(customerService, times(1)).get(bookingDTO.getCustomerId());
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertNotNull(responseEntity.getBody());
+        assertEquals(customerDTO.getName(), responseEntity.getBody().getName());
+        assertEquals(customerDTO.getEmailAddress(), responseEntity.getBody().getEmailAddress());
+        assertEquals(customerDTO.getPhoneNumber(), responseEntity.getBody().getPhoneNumber());
     }
 
+//    @Test
+//    public void testGetBooking_Failure() {
+//        Long bookingId = 1L;
+//        BookingDTO bookingDTO = new BookingDTO();
+//        bookingDTO.setCustomerId(2L); // Assuming customer ID associated with the booking
+//        when(bookingService.get(null)).thenReturn(null);
+//        when(customerService.get(null)).thenReturn(null); // Simulating customer not found
+//
+//        // Call the method being tested
+//        ResponseEntity<BookingDTO> responseEntity = bookingResource.getBooking(null);
+//
+//        // Verify the behavior
+//        verify(bookingService, times(1)).get(bookingId);
+//        verify(customerService, times(1)).get(bookingDTO.getCustomerId());
+//        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, responseEntity.getStatusCode()); // Failing assertion, expecting internal server error
+//        assertNull(responseEntity.getBody()); // Failing assertion, expecting null body
+//    }
 }

@@ -21,13 +21,24 @@ import java.util.Map;
         public ResponseEntity<CustomerDTO> createCustomer(@RequestBody CustomerDTO customerDTO){
             CustomerDTO savedCustomer = customerService.save(customerDTO);
 
-            return new ResponseEntity<>(savedCustomer, HttpStatus.CREATED);
+            if (savedCustomer != null) {
+                return new ResponseEntity<>(savedCustomer, HttpStatus.CREATED);
+            } else {
+                // If savedCustomer is null, it indicates a failure
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+//            return new ResponseEntity<>(savedCustomer, HttpStatus.CREATED);
 
         }
         @GetMapping("{id}")
         public ResponseEntity<CustomerDTO> getCustomer(@PathVariable("id") Long customerId){
             CustomerDTO dto = customerService.get(customerId);
-            return ResponseEntity.ok(dto);
+//            return ResponseEntity.ok(dto);
+            if (dto != null) {
+                return ResponseEntity.ok(dto);
+            } else {
+                return ResponseEntity.notFound().build(); // Respond with 404 if customer is not found
+            }
         }
     @GetMapping
     public ResponseEntity <List<CustomerDTO>> getAllCustomer(){
@@ -49,7 +60,6 @@ import java.util.Map;
     }
 
     @PostMapping("/customer-verify")
-    // public ResponseEntity<CustomerDTO> verifyCustomer(@RequestParam String emailAddress, @RequestParam Long phoneNumber){
         public ResponseEntity<CustomerDTO> verifyCustomer(@RequestBody Map<String, String> loginInfo){
         // CustomerDTO dto = customerService.verifyCustomer(emailAddress,phoneNumber);
         String emailAddress = loginInfo.get("emailAddress");
