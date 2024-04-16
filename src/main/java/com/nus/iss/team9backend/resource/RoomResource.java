@@ -40,6 +40,9 @@ public class RoomResource {
     public ResponseEntity <List<RoomDTO>> getAllRoom(){
         List<RoomDTO> list = roomService.getAll();
         // RoomTypeDTO roomTypeList = roomTypeService.get(list.get(0).getRoomTypeId());
+        if (list.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
         list.forEach(room -> {
             RoomTypeDTO roomType = roomTypeService.get(room.getRoomTypeId());
             room.setRoomTypeId(roomType.getRoomTypeId()); // Assuming there's a setter method for roomType in RoomDTO
