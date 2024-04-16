@@ -73,6 +73,14 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.2.5</version>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.9.0</version> <!-- Updated version -->
+				<configuration>
+					<release>17</release>
+				</configuration>
+			</plugin>
 		</plugins>
 		<defaultGoal>install</defaultGoal>
 		<finalName>nus-team-9</finalName>

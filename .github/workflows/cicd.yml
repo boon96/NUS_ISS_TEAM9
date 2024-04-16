@@ -8,7 +8,7 @@ on:
 
 jobs:
   build_with_maven:
-    name: Build with Maven
+    name: Build with Maven and Test
     runs-on: ubuntu-latest
 
     steps:
@@ -23,11 +23,12 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn clean package
+      - name: Build with test
+        run: mvn test
 
   build_and_push_docker_images:
     name: Build and push Docker images
     runs-on: ubuntu-latest
-
     needs: build_with_maven
     steps:
       - name: Checkout repository
@@ -44,7 +45,7 @@ jobs:
 
       - name: Build and push backend
         run: |
-            docker build -t boonchun/nus_team_9:backend-latest . --build-arg JAR_FILE=target/nus-team-9.jar --no-cache          
+            docker build -t boonchun/nus_team_9:backend-latest . 
             docker push boonchun/nus_team_9:backend-latest
 
       - name: Build and push frontend
@@ -54,20 +55,27 @@ jobs:
             docker build -t boonchun/nus_team_9:frontend-latest . 
             docker push boonchun/nus_team_9:frontend-latest  
 
-
   deploy:
     name: Pull from Docker and Deploy
     needs: build_and_push_docker_images
     runs-on: [aws-ec2]
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Prune unused Docker images
+        run: docker image prune -f
+
       - name: Stop and remove old backend container
         run: |
           docker stop backend || true
           docker rm -f backend || true
+
       - name: Stop and remove old frontend container
         run: |
           docker stop frontend || true
           docker rm -f frontend || true
+
       - name: Pull image from Docker Hub for backend
         run: docker pull boonchun/nus_team_9:backend-latest
       - name: Pull image from Docker Hub for frontend
@@ -76,4 +84,12 @@ jobs:
         run: docker run -d --name backend -p 8080:8080 boonchun/nus_team_9:backend-latest
       - name: Run frontend container
         run: docker run -d --name frontend -p 3000:80 boonchun/nus_team_9:frontend-latest
+      - name: Remove existing docker network
+        run: docker network rm my-network || true
+      - name: Setup docker network
+        run: |
+          docker network create my-network
+          docker network connect my-network frontend
+          docker network connect my-network backend
+      
 
