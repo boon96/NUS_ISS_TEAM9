@@ -5,7 +5,7 @@ export const HotelHeader = () => {
 
     return (
         <div className="d-flex align-items-center justify-content-center">
-            <h1>Team 9 ABC HOTEL</h1>
+            <h1>ABC HOTEL</h1>
         </div>
     )
 }
