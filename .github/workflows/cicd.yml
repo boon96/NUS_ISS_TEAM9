@@ -25,6 +25,10 @@ jobs:
         run: mvn clean package
       - name: Build with test
         run: mvn test
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: typescript
       - name: Analyze with CodeQL
         uses: github/codeql-action/analyze@v3
 
