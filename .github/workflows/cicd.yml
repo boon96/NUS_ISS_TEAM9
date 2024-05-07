@@ -25,6 +25,8 @@ jobs:
         run: mvn clean package
       - name: Build with test
         run: mvn test
+      - name: Analyze with CodeQL
+        uses: github/codeql-action/analyze@v3
 
   build_and_push_docker_images:
     name: Build and push Docker images
